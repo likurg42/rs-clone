@@ -1,4 +1,4 @@
-{
+module.exports = {
   "root": true,
   "parser": "@typescript-eslint/parser",
   "plugins": [
@@ -22,8 +22,9 @@
   ],
   "parserOptions": {
     "ecmaVersion": "latest",
-    "sourceType": "script",
+    "sourceType": "module",
     "project": "./tsconfig.json",
+    tsconfigRootDir: __dirname,
     "ecmaFeatures": {
       "jsx": true
     }
@@ -112,11 +113,12 @@
   "overrides": [
     {
       "files": [
-        "*.js"
+        "**/*.{ts,tsx,js,jsx}"
       ],
       "rules": {
         "@typescript-eslint/no-var-requires": "off"
       }
     }
-  ]
-}
+  ],
+  "ignorePatterns": [".eslintrc.cjs"]
+};

@@ -23,11 +23,12 @@
     "noImplicitAny": true,
     "noImplicitReturns": false,
     "noUnusedParameters": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "baseUrl": "./",
   },
   "references": [
     {
       "path": "./tsconfig.node.json"
     }
-  ]
+  ],
 }
