@@ -1,0 +1,35 @@
+.signup {
+  display: flex;
+  max-width: 940px;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+
+  &__content,
+  &__img {
+    width: 50%;
+  }
+}
+
+.content {
+  &__title {
+    padding-bottom: 20px;
+    font-size: 32px;
+    font-weight: bold;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.video {
+  width: 406px;
+}
+
+@media (max-width: 990px) {
+  .video {
+    display: none;
+  }
+}

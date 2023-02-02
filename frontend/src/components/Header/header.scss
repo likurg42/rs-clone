@@ -1,0 +1,30 @@
+.header {
+  padding: 20px 0;
+  max-width: 1360px;
+  margin: 0 auto;
+  &__conteiner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 20px;
+  }
+
+  &__button {
+    padding: 9px 14px;
+    background-color: rgb(219, 76, 63);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
+.header__button:hover {
+  opacity: 0.7;
+}
