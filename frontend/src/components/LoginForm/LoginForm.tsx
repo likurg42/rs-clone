@@ -1,17 +1,17 @@
-import "./loginForm.scss";
-import { Formik, Form, Field } from "formik";
-import * as yup from "yup";
+import './loginForm.scss';
+import { Formik, Form, Field } from 'formik';
+import * as yup from 'yup';
 
 const LoginForm: React.FC = () => {
   function showPassword() {
-    let input = document.querySelector(".form__password") as HTMLInputElement;
-    let view = document.querySelector(".form__password-control") as HTMLElement;
-    if (input.getAttribute("type") === "password") {
-      view.classList.add("form__password-view");
-      input.setAttribute("type", "text");
+    const input = document.querySelector('.form__password') as HTMLInputElement;
+    const view = document.querySelector('.form__password-control') as HTMLElement;
+    if (input.getAttribute('type') === 'password') {
+      view.classList.add('form__password-view');
+      input.setAttribute('type', 'text');
     } else {
-      view.classList.remove("form__password-view");
-      input.setAttribute("type", "password");
+      view.classList.remove('form__password-view');
+      input.setAttribute('type', 'password');
     }
     return false;
   }
@@ -23,14 +23,16 @@ const LoginForm: React.FC = () => {
 
   return (
     <Formik
-      initialValues={{ email: "", password: "" }}
+      initialValues={{ email: '', password: '' }}
       validateOnBlur
       onSubmit={(values) => {
-        console.log("submit", values);
+        console.log('submit', values);
       }}
       validationSchema={validationSchema}
     >
-      {({ values, errors, touched, isValid, dirty }) => (
+      {({
+        values, errors, touched, isValid, dirty,
+      }) => (
         <Form className="form">
           <div className="form__input-container">
             <label className="form__label" htmlFor="email">
@@ -59,7 +61,7 @@ const LoginForm: React.FC = () => {
               placeholder="Enter your password..."
               value={values.password}
             />
-            <a className="form__password-control" onClick={showPassword}></a>
+            <button className="form__password-control" aria-labelledby="showbutton" type="button" onClick={showPassword} />
             {errors.password && touched.password && (
               <p className="form__error">{errors.password}</p>
             )}
@@ -77,4 +79,4 @@ const LoginForm: React.FC = () => {
   );
 };
 
-export { LoginForm };
+export default LoginForm;
