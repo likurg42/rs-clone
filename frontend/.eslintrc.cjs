@@ -35,6 +35,16 @@ module.exports = {
     "node": true
   },
   "rules": {
+    "jsx-a11y/label-has-associated-control": ["error", {
+      "required": {
+        "some": ["nesting", "id"]
+      }
+    }],
+    "jsx-a11y/label-has-for": ["error", {
+      "required": {
+        "some": ["nesting", "id"]
+      }
+    }],
     "@typescript-eslint/no-explicit-any": "error",
     "no-console": 0,
     "class-methods-use-this": "off",
