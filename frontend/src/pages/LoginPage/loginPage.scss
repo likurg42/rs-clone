@@ -26,10 +26,8 @@
 
 .img__devices {
   width: 406px;
-}
 
-@media (max-width: 990px) {
-  .img__devices {
+  @media screen and (max-width: 990px) {
     display: none;
   }
 }

@@ -26,10 +26,8 @@
 
 .video {
   width: 406px;
-}
 
-@media (max-width: 990px) {
-  .video {
+  @media screen and (max-width: 990px) {
     display: none;
   }
 }
