@@ -4,6 +4,7 @@ import './landing.scss';
 import leftImg from './bg-left.png';
 import illustration from './bg-illustration.png';
 import rightImg from './bg-right.png';
+import Footer from '../../components/Footer/Footer';
 
 const Landing: React.FC = () => (
   <>
@@ -42,6 +43,7 @@ const Landing: React.FC = () => (
         </div>
       </section>
     </main>
+    <Footer />
   </>
 );
 
