@@ -1,75 +1,79 @@
 .footer {
-    background-color: rgb(219, 76, 63);
-    color: white;
+  background-color: rgb(219, 76, 63);
+  color: white;
 
+  &__container {
+    padding: 10px 0;
+    max-width: 1360px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-    &__container {
-        padding: 10px 0;
-        max-width: 1360px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
+  &__year {
+    font-weight: bold;
+    font-size: 20px;
+    user-select: none;
+  }
+
+  &__rss {
+    font-size: 0;
+    width: 100px;
+    height: 50px;
+    background-image: url("./rss.svg");
+    background-repeat: no-repeat;
+    background-size: 100px 50px;
+
+    &:hover {
+      opacity: 0.7;
     }
-
-    &__year {
-        font-weight: bold;
-        font-size: 20px;
-    }
-
-    &__rss {
-        font-size: 0;
-        width: 100px;
-        height: 50px;
-        background-image: url("./rss.svg");
-        background-repeat: no-repeat;
-        background-size: 100px 50px;
-    }
+  }
 }
-
 
 .gitHub {
-    display: flex;
-    gap: 20px;
-    font-size: 0;
+  display: flex;
+  gap: 20px;
+  font-size: 0;
 
-    &__lik,
-    &__jul,
-    &__kar {
-        width: 40px;
-        height: 40px;
-        background-image: url("./github-mark-white.svg");
-        background-repeat: no-repeat;
-        background-size: 40px 40px;
-        position: relative;
-        text-decoration: none;
-        color: white;
+  &__lik,
+  &__jul,
+  &__kar {
+    width: 40px;
+    height: 40px;
+    background-image: url("./github-mark-white.svg");
+    background-repeat: no-repeat;
+    background-size: 40px 40px;
+    position: relative;
+    text-decoration: none;
+    color: white;
 
-        &:hover {
-            opacity: 0.8;
-        }
+    &:hover {
+      opacity: 0.8;
     }
-
+  }
 }
 
-.gitHub__lik:hover::after{
-    content: 'Likurg42';
-    font-size: 15px;
-    position: absolute;
-    bottom: -15px;
-    left: -5px;
+.gitHub__lik:hover::after {
+  content: "Likurg42";
+  font-size: 15px;
+  position: absolute;
+  bottom: -15px;
+  left: -5px;
 }
-.gitHub__jul:hover::after{
-    content: 'JuliaGrib';
-    font-size: 15px;
-    position: absolute;
-    bottom: -15px;
-    left: -7px;
+
+.gitHub__jul:hover::after {
+  content: "JuliaGrib";
+  font-size: 15px;
+  position: absolute;
+  bottom: -15px;
+  left: -7px;
 }
-.gitHub__kar:hover::after{
-    content: 'KarinaGuseva';
-    font-size: 15px;
-    position: absolute;
-    bottom: -15px;
-    left: -23px;
+
+.gitHub__kar:hover::after {
+  content: "KarinaGuseva";
+  font-size: 15px;
+  position: absolute;
+  bottom: -15px;
+  left: -23px;
 }

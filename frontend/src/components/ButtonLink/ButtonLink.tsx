@@ -4,7 +4,7 @@ import cn from 'classnames';
 import style from './buttonLink.module.scss';
 
 type ButtonLinkProps = {
-  readonly type: 'primary' | 'secondary',
+  readonly type: 'primary' | 'secondary' | 'tertiary',
   readonly to: string,
   readonly children: ReactNode
 };
@@ -13,6 +13,7 @@ const ButtonLink = ({ type, to, children }: ButtonLinkProps) => {
   const buttonClass = cn(style.button, {
     [style['button--primary']]: type === 'primary',
     [style['button--secondary']]: type === 'secondary',
+    [style['button--tertiary']]: type === 'tertiary',
   });
 
   return (
