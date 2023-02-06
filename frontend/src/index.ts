@@ -1,4 +1,4 @@
 import init from './init';
-import './index.scss';
+import './styles/style.css';
 
 init();
