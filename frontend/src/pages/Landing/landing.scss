@@ -1,4 +1,10 @@
+.main {
+  flex: 1 1 auto;
+}
+
 .intro {
+  padding: 0 20px;
+
   &__container {
     margin: 0 auto;
     max-width: 1360px;
@@ -33,13 +39,14 @@
 
   &__illustration {
     width: 70%;
+    z-index: -1;
   }
 
   &__left {
     position: absolute;
     left: 0;
     bottom: 0;
-    z-index: -1;
+    z-index: -2;
     width: 25%;
   }
 
@@ -47,7 +54,7 @@
     position: absolute;
     right: 0;
     bottom: 0;
-    z-index: -1;
+    z-index: -2;
     width: 35%;
   }
 
@@ -60,5 +67,39 @@
 }
 
 .review {
+  margin-top: -45px;
+
+  &__divider {
+    width: 100%;
+  }
+}
+
+.content {
   background-image: url(./bg-bottom.png);
+  background-size: 100% 100%, 100% 49px;
+  background-repeat: no-repeat;
+  margin-top: -10px;
+  padding: 0 0 48px;
+
+
+  &__wrapper {
+    padding: 0 20px;
+    margin: 0 auto;
+    max-inline-size: 800px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+  &__text {
+    margin: 10px 0;
+  }
+
+  &__list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }

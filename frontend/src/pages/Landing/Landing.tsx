@@ -5,6 +5,12 @@ import leftImg from './bg-left.png';
 import illustration from './bg-illustration.png';
 import rightImg from './bg-right.png';
 import Footer from '../../components/Footer/Footer';
+import divider from './divider.png';
+import adobe from './adobe.svg';
+import amazon from './amazon.svg';
+import apple from './apple.svg';
+import disney from './disney.svg';
+import rss from './rss.svg';
 
 const Landing: React.FC = () => (
   <>
@@ -39,6 +45,55 @@ const Landing: React.FC = () => (
             src={rightImg}
             alt="people with devices"
           />
+        </div>
+      </section>
+      <section className="review">
+        <img
+          className="review__divider"
+          src={divider}
+          alt="divider"
+        />
+        <div className="review__content content">
+          <div className="content__wrapper">
+            <div className="content__rates">
+              <p className="content__text">
+                300,000+ RATES
+              </p>
+              <p className="content__text">★★★★★</p>
+              <p className="content__text">App Store и Google Play</p>
+            </div>
+            <div className="content__brands">
+              <p className="content__text">USE TEAM AND EMPLOYEES IN</p>
+              <div className="content__list">
+                <img
+                  className="content__brand"
+                  src={adobe}
+                  alt="adobe"
+                />
+                <img
+                  className="content__brand"
+                  src={amazon}
+                  alt="amazon"
+                />
+                <img
+                  className="content__brand"
+                  src={disney}
+                  alt="disney"
+                />
+                <img
+                  className="content__brand"
+                  src={rss}
+                  alt="apple"
+                />
+                <img
+                  className="content__brand"
+                  src={apple}
+                  alt="apple"
+                />
+              </div>
+
+            </div>
+          </div>
         </div>
       </section>
     </main>
