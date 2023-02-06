@@ -1,8 +1,11 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { User } from './users.model.js';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+
+
 
 @ApiTags('Users')
 @Controller('users')
@@ -30,6 +33,7 @@ export class UsersController {
     status: 200,
     type: [User],
   })
+  @UseGuards(JwtAuthGuard)
   @Get()
   findAll() {
     return this.usersService.findAll();
@@ -43,7 +47,7 @@ export class UsersController {
     status: 200,
     type: User,
   })
-
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(+id);
