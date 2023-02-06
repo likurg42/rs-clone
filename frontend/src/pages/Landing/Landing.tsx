@@ -13,12 +13,11 @@ const Landing: React.FC = () => (
       <section className="intro">
         <div className="intro__container">
           <h1 className="intro__title">
-            Организуйте работу и жизнь.
+            Organize your work and life.
           </h1>
           <h2 className="intro__subtitle">
-            Todoist – список дел и таск-менеджер № 1 в мире.
-            Он поможет вам обрести концентрацию,
-            организованность и покой.
+            Todoist – to-do list and task manager number 1 in the world.
+            It will help you gain concentration, organization and peace.
           </h2>
           <ButtonLink to="/signup" type="secondary">
             Start for free
