@@ -1,0 +1,21 @@
+:root {
+  /* Colors */
+  --primary-400: #ee5244;
+
+  /* Fonts */
+  --ff: "Hanken Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* Spacing */
+  --container-gap: clamp(1rem, 4vw, 3rem);
+  --spacer: clamp(1rem, 3vw, 2rem);
+
+  /* Meda Queries */
+  --width-xl: 75rem;
+  --width-lg: 62rem;
+  --width-md: 48rem;
+  --width-sm: 36rem;
+  @custom-media --media-xl (min-width: 75rem);
+  @custom-media --media-lg (min-width: 62rem);
+  @custom-media --media-md (min-width: 48rem);
+  @custom-media --media-sm (min-width: 36rem);
+}

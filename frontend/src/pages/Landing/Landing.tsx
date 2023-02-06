@@ -13,7 +13,7 @@ import disney from './disney.svg';
 import rss from './rss.svg';
 
 const Landing: React.FC = () => (
-  <>
+  <div className="full-page">
     <HeaderLanding />
     <main className="main">
       <section className="intro">
@@ -91,14 +91,13 @@ const Landing: React.FC = () => (
                   alt="apple"
                 />
               </div>
-
             </div>
           </div>
         </div>
       </section>
     </main>
     <Footer />
-  </>
+  </div>
 );
 
 export default Landing;

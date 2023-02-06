@@ -130,5 +130,8 @@ module.exports = {
       }
     }
   ],
-  "ignorePatterns": [".eslintrc.cjs"]
+  "ignorePatterns": [
+    ".eslintrc.cjs",
+    "postcss.config.cjs"
+  ]
 };
