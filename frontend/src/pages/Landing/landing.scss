@@ -72,16 +72,18 @@
   &__divider {
     width: 100%;
   }
+
+  &__content {
+    background-image: url(./bg-bottom.png);
+    background-size: 100% 100%, 100% 49px;
+    background-repeat: no-repeat;
+    margin-top: -10px;
+    padding: 0 0 48px;
+
+  }
 }
 
 .content {
-  background-image: url(./bg-bottom.png);
-  background-size: 100% 100%, 100% 49px;
-  background-repeat: no-repeat;
-  margin-top: -10px;
-  padding: 0 0 48px;
-
-
   &__wrapper {
     padding: 0 20px;
     margin: 0 auto;
