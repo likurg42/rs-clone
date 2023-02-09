@@ -1,9 +1,9 @@
 import './loginPage.scss';
 import HeaderAuthorization from '../../components/HeaderAuthorization/HeaderAuthorization';
 import login from './login.png';
-import LoginForm from '../../components/LoginForm/LoginForm';
 import Footer from '../../components/Footer/Footer';
 import ButtonLink from '../../components/ButtonLink/ButtonLink';
+import LoginForm from '../../components/LoginForm/LoginForm';
 
 const LoginPage: React.FC = () => (
   <div className="full-page">

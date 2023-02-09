@@ -1,9 +1,9 @@
-import './loginForm.scss';
+import './signupForm.scss';
 import { Formik, Form, Field } from 'formik';
 import * as yup from 'yup';
 import React, { useCallback, useState } from 'react';
 
-const LoginForm: React.FC = () => {
+const SignupForm: React.FC = () => {
   const [errorServer, SetErrorServer] = useState(false);
 
   const deleteError = () => {
@@ -33,12 +33,13 @@ const LoginForm: React.FC = () => {
     readonly password: string;
   }) => {
     try {
+      SetErrorServer(false);
       console.log('submit', values);
       const body = {
         email: values.email,
         password: values.password,
       };
-      const response = await fetch('/api/auth/login', {
+      const response = await fetch('/api/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -47,8 +48,8 @@ const LoginForm: React.FC = () => {
       });
       const data = await response.json();
       console.log(data);
-      if (data.message) {
-        throw new Error('Incorrect email or password');
+      if (data.statusCode === 400) {
+        throw new Error('User with this email already exists');
       }
     } catch (error) {
       SetErrorServer(true);
@@ -106,11 +107,11 @@ const LoginForm: React.FC = () => {
           >
             Sign in
           </button>
-          {errorServer && (<p className="form__server-error">Incorrect email or password</p>)}
+          {errorServer && (<p className="form__server-error">User with this email already exists</p>)}
         </Form>
       )}
     </Formik>
   );
 };
 
-export default LoginForm;
+export default SignupForm;
