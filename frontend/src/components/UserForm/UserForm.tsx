@@ -2,6 +2,7 @@ import './userForm.scss';
 import {
   FormikProps,
 } from 'formik';
+import { useState } from 'react';
 
 type FormProps = {
   readonly form: FormikProps<FormValues>
@@ -16,19 +17,11 @@ interface FormValues {
 const UserForm: React.FC<FormProps> = (
   { form, errorServer, deleteError }: FormProps,
 ) => {
-  function showPassword() {
-    const input = document.querySelector('.form__password') as HTMLInputElement;
-    const view = document.querySelector('.form__password-control') as HTMLElement;
-    if (input.getAttribute('type') === 'password') {
-      view.classList.add('form__password-view');
-      input.setAttribute('type', 'text');
-    } else {
-      view.classList.remove('form__password-view');
-      input.setAttribute('type', 'password');
-    }
-    return false;
-  }
-  console.log(form.touched.password);
+  const [isType, setIsType] = useState(true);
+  const changePasswordVisibility = () => {
+    if (isType) setIsType(false);
+    if (!isType) setIsType(true);
+  };
 
   return (
     <form className="form" onSubmit={form.handleSubmit}>
@@ -57,14 +50,14 @@ const UserForm: React.FC<FormProps> = (
         <input
           className="form__password"
           name="password"
-          type="password"
+          type={isType ? 'password' : 'text'}
           placeholder="Enter your password..."
           value={form.values.password}
           onChange={form.handleChange}
           onFocus={deleteError}
           onBlur={(e) => { form.handleBlur(e); }}
         />
-        <button className="form__password-control" aria-labelledby="showbutton" type="button" onClick={showPassword} />
+        <button className="form__password-control" aria-labelledby="showbutton" type="button" onClick={changePasswordVisibility} />
         {form.errors.password && form.touched.password && (
           <p className="form__error">{form.errors.password}</p>
         )}
