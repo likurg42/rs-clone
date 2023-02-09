@@ -19,8 +19,7 @@ const UserForm: React.FC<FormProps> = (
 ) => {
   const [isType, setIsType] = useState(true);
   const changePasswordVisibility = () => {
-    if (isType) setIsType(false);
-    if (!isType) setIsType(true);
+    setIsType(!isType);
   };
 
   return (
