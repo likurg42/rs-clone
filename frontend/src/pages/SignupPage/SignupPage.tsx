@@ -1,7 +1,7 @@
 import ButtonLink from '../../components/ButtonLink/ButtonLink';
 import Footer from '../../components/Footer/Footer';
 import HeaderAuthorization from '../../components/HeaderAuthorization/HeaderAuthorization';
-import LoginForm from '../../components/LoginForm/LoginForm';
+import SignupForm from '../../components/SignupForm/SignupForm';
 import './signupPage.scss';
 
 const SignupPage: React.FC = () => (
@@ -12,7 +12,7 @@ const SignupPage: React.FC = () => (
         <div className="signup__wrapper">
           <div className="signup__content content">
             <div className="content__title">Sign up</div>
-            <LoginForm />
+            <SignupForm />
             <div className="content__account">
               Already have an account? Then&nbsp;
               <ButtonLink to="/login" type="tertiary">
