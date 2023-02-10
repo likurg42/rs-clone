@@ -3,9 +3,12 @@ name: Frontend CI
 
 # Trigger the workflow on push or pull request
 on:
-  push:
   pull_request:
-    - develop
+    types:
+      - opened
+    branches:
+      - 'develop'
+      - 'main'
 
 jobs:
   build:
