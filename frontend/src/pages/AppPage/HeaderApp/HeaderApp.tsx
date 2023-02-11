@@ -1,4 +1,4 @@
-import './headerTasks.scss';
+import './headerApp.scss';
 
 const HeaderTasks: React.FC = () => (
   <header className="header-tasks">

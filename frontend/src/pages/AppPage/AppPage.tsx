@@ -1,11 +1,11 @@
-import './tasksPage.scss';
-import HeaderTasks from './HeaderTasks/HeaderTasks';
+import './appPage.scss';
+import HeaderApp from './HeaderApp/HeaderApp';
 import Sidebar from './Sidebar/Sidebar';
 import Tasks from './Tasks/Tasks';
 
 const TasksPage: React.FC = () => (
   <div>
-    <HeaderTasks />
+    <HeaderApp />
     <div className="main-page">
       <Sidebar />
       <div className="main-tasks">
