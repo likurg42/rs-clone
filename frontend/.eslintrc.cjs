@@ -83,6 +83,7 @@ module.exports = {
     "functional/no-try-statement": 0,
     "functional/no-throw-statement": 0,
     "functional/no-return-void": 0,
+    "functional/no-mixed-type": 0,
     "no-param-reassign": [
       "error",
       {
@@ -130,5 +131,8 @@ module.exports = {
       }
     }
   ],
-  "ignorePatterns": [".eslintrc.cjs"]
+  "ignorePatterns": [
+    ".eslintrc.cjs",
+    "postcss.config.cjs"
+  ]
 };
