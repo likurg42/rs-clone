@@ -1,0 +1,33 @@
+.sidebar__elem {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 10px;
+    box-sizing: border-box;
+
+    &:hover {
+        background-color: #eee;
+        border-radius: 5px;
+    }
+
+}
+
+.sidebar__title {
+    display: flex;
+    align-items:center;
+
+    img {
+        width: 16px;
+        height: 16px;
+        padding: 0 5px 0 0;
+    }
+    p {       
+        font-size: 13px;
+    }
+}
+
+.sidebar__count {
+    font-size: 10px;
+    color: grey;
+}

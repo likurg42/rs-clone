@@ -1,0 +1,18 @@
+.taskElem {
+    cursor: pointer;
+    border-bottom: 1px solid #f5f5f5;
+    padding: 20px;
+    transition: 0.3s all;
+    display: flex;
+
+    &:hover {
+        background-color: #eee;
+        border-radius: 5px;
+    }
+
+    p {
+        font-size: 14px;
+        padding: 0 0 0 10px;
+    }
+    
+}
