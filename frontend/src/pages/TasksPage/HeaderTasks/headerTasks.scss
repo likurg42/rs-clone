@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+@mixin burger-menu {
+    width: 15px;
+    height: 1px;
+    background-color: white;
+}
+
+.header-tasks {
+    background-color: #db4c3f;
+    padding: 12px 18px;
+}
+
+.header__burger-tasks {
+    @include burger-menu;
+    cursor: pointer;
+
+    &::before {
+        content: '';
+        display: block;
+        @include burger-menu;
+        position: relative;
+        top: -5px;
+
+    }
+
+    &::after {
+        content: '';
+        display: block;
+        @include burger-menu;
+        position: relative;
+        top: 5px;
+
+    }
+
+}

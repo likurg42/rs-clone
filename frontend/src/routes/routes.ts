@@ -3,6 +3,7 @@ const routes = {
     main: () => '/',
     login: () => '/login',
     signup: () => '/signup',
+    tasks: () => '/tasks',
   },
 };
 
