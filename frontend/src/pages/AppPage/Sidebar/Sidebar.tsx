@@ -1,11 +1,11 @@
 import './sidebar.scss';
 import SidebarElem from './SidebarElem';
-import iconOne from './1.png';
-import iconTwo from './2.png';
-import iconThree from './3.png';
-import iconFour from './4.png';
-import iconFive from './5.png';
-import iconSix from './6.png';
+import iconOne from './1.svg';
+import iconTwo from './2.svg';
+import iconThree from './3.svg';
+import iconFour from './4.svg';
+import iconFive from './5.svg';
+import iconSix from './6.svg';
 
 const Sidebar: React.FC = () => (
   <div className="sidebar">

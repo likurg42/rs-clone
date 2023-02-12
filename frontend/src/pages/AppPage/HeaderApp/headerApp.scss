@@ -6,7 +6,9 @@
 @mixin burger-menu {
     width: 15px;
     height: 1px;
-    background-color: white;
+    position: relative;
+    border-top: 1px solid white;
+
 }
 
 .header-tasks {
@@ -22,8 +24,9 @@
         content: '';
         display: block;
         @include burger-menu;
-        position: relative;
-        top: -5px;
+        height: 12px;
+        position: absolute;
+        top: -6px;
 
     }
 
@@ -32,7 +35,7 @@
         display: block;
         @include burger-menu;
         position: relative;
-        top: 5px;
+        top:4px;
 
     }
 
