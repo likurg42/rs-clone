@@ -2,46 +2,51 @@ import './loginPage.scss';
 import { useFormik } from 'formik';
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import HeaderAuthorization from '../../components/HeaderAuthorization/HeaderAuthorization';
-import loginImg from './login.png';
+import login from './login.png';
 import Footer from '../../components/Footer/Footer';
 import ButtonLink from '../../components/ButtonLink/ButtonLink';
 import UserForm from '../../components/UserForm/UserForm';
 import getValidationSchema from '../../schemas/validationSchema';
-import useAuth from '../../hooks/useAuth';
-import routes from '../../routes/routes';
 
 const LoginPage: React.FC = () => {
   const [errorServer, setErrorServer] = useState(false);
-  const { login } = useAuth();
   const navigate = useNavigate();
 
   const deleteError = () => {
     setErrorServer(false);
   };
 
-  const onSubmit = useCallback(async (body: {
+  const onSubmit = useCallback(async (values: {
     readonly email: string;
     readonly password: string;
   }) => {
-    setErrorServer(false);
     try {
-      const { data } = await axios.post(routes.api.login(), body);
-      login(data);
-
+      console.log('submit', values);
+      const body = {
+        email: values.email,
+        password: values.password,
+      };
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      });
+      const data = await response.json();
+      console.log(data);
       if (data.token) {
-        navigate(routes.pages.app());
+        navigate('/');
+        localStorage.setItem('token', data.token + data.email);
       }
-
       if (data.message) {
         throw new Error('Incorrect email or password');
       }
     } catch (error) {
-      console.log(error);
       setErrorServer(true);
     }
-  }, [login, navigate]);
+  }, [navigate]);
 
   const form = useFormik({
     initialValues: { email: '', password: '' },
@@ -72,7 +77,7 @@ const LoginPage: React.FC = () => {
             <div className="login__img img">
               <img
                 className="img__devices"
-                src={loginImg}
+                src={login}
                 alt="drawn devices"
               />
             </div>
