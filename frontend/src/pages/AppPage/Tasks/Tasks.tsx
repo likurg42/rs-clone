@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './tasks.scss';
+import TodoForm from '../../../components/TodoForm/TodoForm';
+import TodoList from '../../../components/TodoList/TodoList';
 import TaskElem from './TaskElem';
+import { useAppDispatch } from '../../../hooks/todoHook';
+import { addTodo } from '../../../slice/todoSlice';
 
 const Tasks: React.FC = () => {
   const tasks = [
@@ -36,15 +40,36 @@ const Tasks: React.FC = () => {
     },
   ];
 
+  const [text, setText] = useState('');
+  const dispatch = useAppDispatch();
+
+  const handleAction = () => {
+    if (text.trim().length) {
+      dispatch(addTodo(text));
+      setText('');
+    }
+  };
+
   return (
-    <div className="tasks">
-      <h2 className="tasks__header">Inbox</h2>
-      {tasks.map((taskProps) => (
-        <React.Fragment key={taskProps.id}>
-          <TaskElem taskProps={taskProps} />
-        </React.Fragment>
-      ))}
-    </div>
+    <>
+      <div className="tasks">
+        <h2 className="tasks__header">Inbox</h2>
+        {tasks.map((taskProps) => (
+          <React.Fragment key={taskProps.id}>
+            <TaskElem taskProps={taskProps} />
+          </React.Fragment>
+        ))}
+      </div>
+      <div>
+        <TodoForm
+          value={text}
+          updateText={setText}
+          handleAction={handleAction}
+        />
+        <TodoList />
+      </div>
+
+    </>
   );
 };
 
