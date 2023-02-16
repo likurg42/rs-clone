@@ -5,25 +5,25 @@ import { User } from './users.model';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User) private userRepository: typeof User) { }
+  constructor(@InjectModel(User) private userRepository: typeof User) {
+  }
 
   async create(createUserDto: CreateUserDto) {
-    const user = await this.userRepository.create(createUserDto);
-    return user;
+    return await this.userRepository.create(createUserDto);
   }
 
   async findAll() {
-    const users = await this.userRepository.findAll({ include: { all: true } });
-    return users;
+    return await this.userRepository.findAll({ include: { all: true } });
   }
 
   async findOne(id: number) {
-    const user = await this.userRepository.findOne({ where: { id } });
-    return user;
+    return await this.userRepository.findOne({ where: { id }, include: { all: true } });
   }
 
   async findUserByEmail(email: string) {
-    const user = await this.userRepository.findOne({ where: { email }, include: { all: true } });
-    return user;
+    return await this.userRepository.findOne({
+      where: { email },
+      include: { all: true }
+    });
   }
 }
