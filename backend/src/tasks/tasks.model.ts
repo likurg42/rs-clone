@@ -11,11 +11,13 @@ interface TaskCreationAttrs {
   userId: number;
 }
 
-@Table({ tableName: 'tasks' })
+@Table({ tableName: 'tasks', paranoid: true })
 export class Task extends Model<Task, TaskCreationAttrs> {
 
   @ApiProperty({ example: '1', description: 'User ID' })
-  @Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
+  @Column({
+    type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true
+  })
   id: number;
 
   @ApiProperty({ example: 'New task', description: 'Task title' })
@@ -26,7 +28,9 @@ export class Task extends Model<Task, TaskCreationAttrs> {
   @Column({ type: DataType.BOOLEAN, defaultValue: false })
   completed: boolean;
 
-  @ApiProperty({ example: 'My new super urgent task', description: 'Task description' })
+  @ApiProperty({
+    example: 'My new super urgent task', description: 'Task description'
+  })
   @Column({ type: DataType.STRING })
   description: string;
 
