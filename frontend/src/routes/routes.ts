@@ -3,7 +3,12 @@ const routes = {
     main: () => '/',
     login: () => '/login',
     signup: () => '/signup',
-    tasks: () => '/tasks',
+    app: () => '/app',
+  },
+  api: {
+    login: () => '/api/auth/login',
+    signup: () => '/api/auth/signup',
+    tasks: (userId = '') => `/api/tasks/${userId}`,
   },
 };
 

@@ -16,3 +16,7 @@
     }
     
 }
+
+input:checked+p {
+    text-decoration: line-through;
+  }

@@ -2,51 +2,41 @@ import './signupPage.scss';
 import { useFormik } from 'formik';
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import UserForm from '../../components/UserForm/UserForm';
 import HeaderAuthorization from '../../components/HeaderAuthorization/HeaderAuthorization';
 import Footer from '../../components/Footer/Footer';
 import ButtonLink from '../../components/ButtonLink/ButtonLink';
 import getValidationSchema from '../../schemas/validationSchema';
+import routes from '../../routes/routes';
+import useAuth from '../../hooks/useAuth';
 
 const SignupPage: React.FC = () => {
   const [errorServer, SetErrorServer] = useState(false);
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const deleteError = () => {
     SetErrorServer(false);
   };
 
-  const onSubmit = useCallback(async (values: {
+  const onSubmit = useCallback(async (body: {
     readonly email: string;
     readonly password: string;
   }) => {
+    SetErrorServer(false);
     try {
-      SetErrorServer(false);
-      console.log('submit', values);
-      const body = {
-        email: values.email,
-        password: values.password,
-      };
-      const response = await fetch('/api/auth/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-      });
-      const data = await response.json();
-      console.log(data);
-      if (data.token) {
-        navigate('/');
-        localStorage.setItem('token', data.token + data.email);
-      }
+      const { data } = await axios.post(routes.api.signup(), body);
+      login(data);
+      navigate(routes.pages.app());
+
       if (data.statusCode === 400) {
         throw new Error('User with this email already exists');
       }
     } catch (error) {
       SetErrorServer(true);
     }
-  }, [navigate]);
+  }, [navigate, login]);
 
   const form = useFormik({
     initialValues: { email: '', password: '' },
