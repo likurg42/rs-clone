@@ -5,6 +5,10 @@ import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { AuthModule } from './auth/auth.module';
 import { TasksModule } from './tasks/tasks.module';
+import { Task } from "./tasks/tasks.model";
+import { ProjectsController } from './projects/projects.controller';
+import { ProjectsModule } from './projects/projects.module';
+import { Project } from "./projects/projects.model";
 
 @Module({
   imports: [
@@ -20,14 +24,19 @@ import { TasksModule } from './tasks/tasks.module';
       database: process.env.POSTGRES_DB,
       models: [
         User,
+        Task,
+        Project,
       ],
       autoLoadModels: true,
+      synchronize: true,
     }),
     UsersModule,
     AuthModule,
-    TasksModule
+    TasksModule,
+    ProjectsModule
   ],
-  controllers: [],
+  controllers: [ProjectsController],
   providers: [],
 })
-export class AppModule { }
+export class AppModule {
+}
