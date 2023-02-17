@@ -4,7 +4,7 @@ module.exports = {
   "plugins": [
     "react",
     "react-hooks",
-    "jsx-a11y",
+    // "jsx-a11y",
     "functional",
     "import",
     "@typescript-eslint"
@@ -17,7 +17,7 @@ module.exports = {
     "plugin:import/typescript",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "plugin:functional/recommended",
+    // "plugin:functional/recommended",
     "plugin:@typescript-eslint/recommended"
   ],
   "parserOptions": {

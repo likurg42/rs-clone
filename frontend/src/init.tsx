@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import App from './App';
 import { AuthProvider } from './context/authContext';
+import store from './slice/store/store';
 
 const init = () => {
   const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
@@ -9,7 +11,9 @@ const init = () => {
   root.render(
     <React.StrictMode>
       <AuthProvider>
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </AuthProvider>
     </React.StrictMode>,
   );
