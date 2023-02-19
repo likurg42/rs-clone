@@ -4,7 +4,7 @@ import {
 import axios, { AxiosError } from 'axios';
 
 import routes from '../routes/routes';
-import { Todo, TodoDto } from '../types/todoType';
+import { CreateTodo, Todo, TodoDto } from '../types/todoType';
 
 type TodoState = {
   readonly list: readonly Todo[];
@@ -17,7 +17,7 @@ export interface SerializedError {
   statusCode?: number;
 }
 
-const createSerializedError = (e: unknown): SerializedError => {
+export const createSerializedError = (e: unknown): SerializedError => {
   if (e instanceof AxiosError) {
     return {
       name: e.name,
@@ -46,15 +46,7 @@ export const fetchTodos = createAsyncThunk<
       const { data } = response;
       return data;
     } catch (e) {
-      if (e instanceof AxiosError) {
-        const error: SerializedError = {
-          name: e.name,
-          statusCode: e?.response?.status,
-        };
-        return rejectWithValue(error);
-      }
-
-      return rejectWithValue(e as Error);
+      return rejectWithValue(createSerializedError(e));
     }
   },
 );
@@ -62,20 +54,14 @@ export const fetchTodos = createAsyncThunk<
 export const addNewTodo = createAsyncThunk<
   Todo,
   {
-    title: string,
-    project?: string,
+    todo: CreateTodo,
     headers: { Authorization?: string },
   },
   { readonly rejectValue: SerializedError | Error }
 >(
   'tasks/add',
-  async ({ title, headers, project }, { rejectWithValue }) => {
+  async ({ todo, headers }, { rejectWithValue }) => {
     try {
-      const todo = {
-        title,
-        complete: false,
-        project,
-      };
       const response = await axios.post(routes.api.tasks(), todo, { headers });
       const { data } = response;
       return data;
@@ -125,7 +111,7 @@ export const removeTodo = createAsyncThunk<
   },
 );
 
-function isError(action: AnyAction) {
+export function isError(action: AnyAction) {
   return action.type.endsWith('rejected');
 }
 

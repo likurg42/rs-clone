@@ -4,7 +4,7 @@ interface TodoFormProps {
   readonly handleAction: () => void;
 }
 
-const TodoForm: React.FC<TodoFormProps> = ({
+const TodoForm = ({
   value,
   updateText,
   handleAction,

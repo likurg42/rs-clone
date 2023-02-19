@@ -10,6 +10,7 @@ const routes = {
     signup: () => '/api/auth/signup',
     tasks: () => '/api/tasks/',
     task: (taskID = '') => `/api/tasks/${taskID}`,
+    projects: () => '/api/projects/',
   },
 };
 

@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fluentui/react-icons": "^2.0.194",
     "@reduxjs/toolkit": "^1.8.5",
     "axios": "^1.2.2",
     "classnames": "^2.3.2",

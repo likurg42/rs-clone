@@ -1,34 +1,36 @@
 .sidebar__elem {
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 7px 10px;
-    box-sizing: border-box;
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 10px;
+  box-sizing: border-box;
 
-    &:hover {
-        background-color: #eee;
-        border-radius: 5px;
-    }
+  &:hover {
+    background-color: #eee;
+    border-radius: 5px;
+  }
 
 }
 
 .sidebar__title {
-    display: flex;
-    align-items:center;
+  display: flex;
+  align-items: center;
 
-    img {
-        width: 24px;
-        height: 24px;
-        padding: 0 5px 0 0;
-        background-size: 24px 24px;
-    }
-    p {       
-        font-size: 13px;
-    }
+  img {
+    width: 24px;
+    height: 24px;
+    padding: 0 5px 0 0;
+    background-size: 24px 24px;
+  }
+
+  p {
+    font-size: 13px;
+  }
 }
 
 .sidebar__count {
-    font-size: 10px;
-    color: grey;
+  font-size: 10px;
+  color: grey;
 }

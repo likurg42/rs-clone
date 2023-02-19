@@ -1,5 +1,5 @@
 import { useAppDispatch } from '../../hooks/todoHook';
-import { toggleTodo, removeTodo } from '../../slice/todoSlice';
+import { updateTodo, removeTodo } from '../../slice/todoSlice';
 import '../../pages/AppPage/Tasks/taskElem.scss';
 
 type TodoItemType = {
@@ -20,7 +20,7 @@ const TodoItem = ({ todoItemProps }: TodoItemProps) => {
       <input
         type="checkbox"
         checked={todoItemProps.complete}
-        onChange={() => dispatch(toggleTodo(todoItemProps.id))}
+        onChange={() => dispatch(updateTodo(todoItemProps.id))}
       />
       <p>
         {todoItemProps.title}
