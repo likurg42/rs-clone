@@ -1,5 +1,8 @@
 export type Todo = {
-  readonly id: string;
+  readonly id: number;
   readonly title: string;
-  readonly complete: boolean;
+  readonly completed: boolean;
+  readonly projectId: string;
 };
+
+export type TodoDto = Partial<Todo>;

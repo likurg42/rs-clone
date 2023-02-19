@@ -8,7 +8,8 @@ const routes = {
   api: {
     login: () => '/api/auth/login',
     signup: () => '/api/auth/signup',
-    tasks: (userId = '') => `/api/tasks/${userId}`,
+    tasks: () => '/api/tasks/',
+    task: (taskID = '') => `/api/tasks/${taskID}`,
   },
 };
 

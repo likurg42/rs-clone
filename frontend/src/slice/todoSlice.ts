@@ -4,7 +4,7 @@ import {
 import axios, { AxiosError } from 'axios';
 
 import routes from '../routes/routes';
-import { Todo } from '../types/todoType';
+import { Todo, TodoDto } from '../types/todoType';
 
 type TodoState = {
   readonly list: readonly Todo[];
@@ -17,103 +17,111 @@ export interface SerializedError {
   statusCode?: number;
 }
 
+const createSerializedError = (e: unknown): SerializedError => {
+  if (e instanceof AxiosError) {
+    return {
+      name: e.name,
+      statusCode: e?.response?.status,
+    };
+  }
+
+  if (e instanceof Error) return { name: e.name };
+
+  return {
+    name: 'Unknown Error',
+  };
+};
+
 export const fetchTodos = createAsyncThunk<
-Todo[], { userId: number,
-  headers: { Authorization?: string } }, { readonly rejectValue: SerializedError }>(
+  Todo[],
+  {
+    headers: { Authorization?: string }
+  },
+  { readonly rejectValue: SerializedError | Error }
+>(
   'tasks/fetch',
-  async ({ headers, userId }, { rejectWithValue }) => {
+  async ({ headers }, { rejectWithValue }) => {
     try {
-      const response = await axios.get(routes.api.tasks(String(userId)), { headers });
+      const response = await axios.get(routes.api.tasks(), { headers });
       const { data } = response;
       return data;
     } catch (e) {
       if (e instanceof AxiosError) {
-        const error:SerializedError = {
+        const error: SerializedError = {
           name: e.name,
           statusCode: e?.response?.status,
         };
         return rejectWithValue(error);
       }
-      return rejectWithValue(e as AxiosError);
+
+      return rejectWithValue(e as Error);
     }
   },
 );
 
 export const addNewTodo = createAsyncThunk<
-Todo, { title: string,
-  userId: number, headers: { Authorization?: string } }, { readonly rejectValue: SerializedError }>(
+  Todo,
+  {
+    title: string,
+    project?: string,
+    headers: { Authorization?: string },
+  },
+  { readonly rejectValue: SerializedError | Error }
+>(
   'tasks/add',
-  async ({ title, userId, headers }, { rejectWithValue }) => {
+  async ({ title, headers, project }, { rejectWithValue }) => {
     try {
       const todo = {
-        userId,
         title,
         complete: false,
+        project,
       };
       const response = await axios.post(routes.api.tasks(), todo, { headers });
       const { data } = response;
       return data;
     } catch (e) {
-      if (e instanceof AxiosError) {
-        const error:SerializedError = {
-          name: e.name,
-          statusCode: e?.response?.status,
-        };
-        return rejectWithValue(error);
-      }
-      return rejectWithValue(e as AxiosError);
+      return rejectWithValue(createSerializedError(e));
     }
-    // const response = await fetch('/api/tasks/6', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(todo),
-    // });
-    // if (!response.ok) {
-    //   return rejectWithValue('Error');
-    // }
-    // const data = (await response.json()) as Todo;
-    // return data;
   },
 );
 
-export const toggleTodo = createAsyncThunk<
-Todo, string, { readonly rejectValue: string, state: { todos: TodoState } }>(
+export const updateTodo = createAsyncThunk<
+  Todo,
+  {
+    id: number,
+    todoDto: TodoDto,
+    headers: { Authorization?: string },
+  },
+  { readonly rejectValue: SerializedError }
+>(
   'tasks/toggle',
-  async (id, { rejectWithValue, getState }) => {
-    const todo = getState().todos.list.find((elem) => elem.id === id);
-    if (todo) {
-      const response = await fetch('http://localhost:7000/api/tasks', {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          complete: !todo?.complete,
-        }),
-      });
-      if (!response.ok) {
-        return rejectWithValue('Error');
-      }
-      const data = (await response.json()) as Todo;
-      return data;
+  async ({ id, todoDto, headers }, { rejectWithValue }) => {
+    try {
+      const response = await axios.patch(routes.api.task(String(id)), todoDto, { headers });
+      const [, [todo]] = response.data;
+      return todo;
+    } catch (e) {
+      return rejectWithValue(createSerializedError(e));
     }
-    return rejectWithValue('error');
   },
 );
 
-export const removeTodo = createAsyncThunk<string, string, { readonly rejectValue: string }>(
+export const removeTodo = createAsyncThunk<
+  number,
+  {
+    id: number,
+    headers: { Authorization?: string },
+  },
+  { readonly rejectValue: SerializedError }
+>(
   'tasks/remove',
-  async (id, { rejectWithValue }) => {
-    const response = await fetch('http://localhost:7000/api/tasks', {
-      method: 'DELETE',
-    });
-    if (!response.ok) {
-      return rejectWithValue('Error');
+  async ({ id, headers }, { rejectWithValue }) => {
+    try {
+      await axios.delete(routes.api.task(String(id)), { headers });
+      return id;
+    } catch (e) {
+      return rejectWithValue(createSerializedError(e));
     }
-
-    return id;
   },
 );
 
@@ -129,8 +137,7 @@ const initialState: TodoState = {
 const todoSlice = createSlice({
   name: 'todos',
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchTodos.pending, (state) => {
@@ -148,14 +155,12 @@ const todoSlice = createSlice({
         state.list.push(action.payload);
         state.loading = false;
       })
-      .addCase(toggleTodo.fulfilled, (state, action) => {
-        const toggledTodo = state.list.find((todo) => todo.id === action.payload.id);
-        if (toggledTodo) {
-          toggledTodo.complete = !toggledTodo.complete;
-        }
+      .addCase(updateTodo.fulfilled, (state, { payload }) => {
+        const { id } = payload;
+        state.list = state.list.map((item) => (item.id === id ? payload : item));
       })
-      .addCase(removeTodo.fulfilled, (state, action) => {
-        state.list = state.list.filter((todo) => todo.id !== action.payload);
+      .addCase(removeTodo.fulfilled, (state, { payload }) => {
+        state.list = state.list.filter((task) => task.id !== payload);
       })
       .addMatcher(isError, (state, action: PayloadAction<string>) => {
         state.loading = false;
@@ -163,7 +168,5 @@ const todoSlice = createSlice({
       });
   },
 });
-
-// export const { addTodo, removeTodo, toggleCompleteTodo } = todoSlice.actions;
 
 export default todoSlice.reducer;
