@@ -3,7 +3,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "concurrently \"npm run --prefix backend start:dev\" \"npm run --prefix frontend dev\""
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/likurg42/rs-clone/issues"
   },
-  "homepage": "https://github.com/likurg42/rs-clone#readme"
+  "homepage": "https://github.com/likurg42/rs-clone#readme",
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
 }
