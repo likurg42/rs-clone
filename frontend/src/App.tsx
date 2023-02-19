@@ -18,7 +18,7 @@ const App = () => (
           <PrivateRoute>
             <AppPage />
           </PrivateRoute>
-          )}
+        )}
       />
       <Route path="*" element={<h1>NO</h1>} />
     </Routes>
