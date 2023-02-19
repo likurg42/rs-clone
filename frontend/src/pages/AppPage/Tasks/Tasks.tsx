@@ -1,6 +1,7 @@
 import React from 'react';
 import './tasks.scss';
 import TaskElem from './TaskElem';
+import AddTask from '../AddTask/AddTask';
 
 const Tasks: React.FC = () => {
   const tasks = [
@@ -44,6 +45,7 @@ const Tasks: React.FC = () => {
           <TaskElem taskProps={taskProps} />
         </React.Fragment>
       ))}
+      <AddTask />
     </div>
   );
 };
