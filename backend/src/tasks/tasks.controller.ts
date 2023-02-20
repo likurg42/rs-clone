@@ -25,7 +25,7 @@ type ValidatedRequest = Request & {
 }
 
 @ApiTags('Tasks')
-@Controller('tasks')
+@Controller('api/tasks')
 export class TasksController {
   constructor(
     private taskService: TasksService,

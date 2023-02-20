@@ -1,16 +1,18 @@
+const API_PREFIX = '/api';
+
 const routes = {
   pages: {
-    main: () => '/',
-    login: () => '/login',
-    signup: () => '/signup',
-    app: () => '/app',
+    main: () => ['/'].join('/'),
+    login: () => ['/login'].join('/'),
+    signup: () => ['/signup'].join('/'),
+    app: () => ['/app'].join('/'),
   },
   api: {
-    login: () => '/api/auth/login',
-    signup: () => '/api/auth/signup',
-    tasks: () => '/api/tasks/',
-    task: (taskID = '') => `/api/tasks/${taskID}`,
-    projects: () => '/api/projects/',
+    login: () => [API_PREFIX, 'auth', 'login'].join('/'),
+    signup: () => [API_PREFIX, 'auth', 'signup'].join('/'),
+    tasks: () => [API_PREFIX, 'tasks'].join('/'),
+    task: (taskID = '') => [API_PREFIX, 'tasks', taskID].join('/'),
+    projects: () => [API_PREFIX, 'projects'].join('/'),
   },
 };
 
