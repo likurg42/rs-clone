@@ -5,6 +5,7 @@ import SignupPage from './pages/SignupPage/SignupPage';
 import Landing from './pages/Landing/Landing';
 import AppPage from './pages/AppPage/AppPage';
 import PrivateRoute from './routes/PrivateRoute';
+import NotFoundPage404 from './pages/NotFound404/NotFoundPage404';
 
 const App = () => (
   <BrowserRouter>
@@ -20,7 +21,7 @@ const App = () => (
           </PrivateRoute>
         )}
       />
-      <Route path="*" element={<h1>NO</h1>} />
+      <Route path="*" element={<NotFoundPage404 />} />
     </Routes>
   </BrowserRouter>
 );
