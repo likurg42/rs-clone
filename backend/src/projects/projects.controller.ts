@@ -14,7 +14,7 @@ type ValidatedRequest = Request & {
   }
 }
 
-@Controller('projects')
+@Controller('api/projects')
 export class ProjectsController {
   constructor(
     private projectService: ProjectsService,

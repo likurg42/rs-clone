@@ -3,6 +3,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "npm run start --prefix backend",
+    "build": "npm run build --prefix frontend",
     "dev": "concurrently \"npm run --prefix backend start:dev\" \"npm run --prefix frontend dev\""
   },
   "repository": {
