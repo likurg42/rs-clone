@@ -18,7 +18,7 @@ const TasksPage = () => {
   }, [dispatch, getHeaders]);
 
   return (
-    <div>
+    <div className="full-page">
       <HeaderApp />
       <div className="main-page">
         <Sidebar projects={projects} />
