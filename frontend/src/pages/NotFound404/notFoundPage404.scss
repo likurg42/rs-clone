@@ -3,11 +3,11 @@
     text-align: center;
 
     &__title{
-        font-size: 100px;
+        font-size: calc(3.125vw + 40.00px);
     }
 
     &__subtitle{
-        font-size: 50px; 
+        font-size: calc(1.563vw + 20.00px); 
     }
 
     &__link{

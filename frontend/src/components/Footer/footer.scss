@@ -15,6 +15,10 @@
     font-weight: bold;
     font-size: 20px;
     user-select: none;
+
+    @media screen and (max-width: 40rem) {
+      font-size: 14px;
+    }
   }
 
   &__rss {
@@ -35,6 +39,10 @@
   display: flex;
   gap: 20px;
   font-size: 0;
+
+  @media screen and (max-width: 40rem) {
+    gap: 10px;
+  }
 
   &__lik,
   &__jul,
