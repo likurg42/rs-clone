@@ -7,12 +7,12 @@
   width: 15px;
   height: 1px;
   position: relative;
-  border-top: 1px solid white;
+  border-top: 1px solid var(--header-icons-bg-clr);
 
 }
 
 .header-tasks {
-  background-color: var(--primary-400);
+  background-color: var(--header-background);
   padding: 12px 18px;
   display: flex;
   align-items: center;
@@ -44,37 +44,9 @@
 
 }
 
-// .header__input {
-//     z-index: -1;
-//     opacity: 0;
-//   }
-
-//   .header__input::before {
-//     content: '';
-//     display: inline-block;
-//     width: 1em;
-//     height: 1em;
-//     flex-shrink: 0;
-//     flex-grow: 0;
-//     border: 1px solid #adb5bd;
-//     border-radius: 0.25em;
-//     margin-right: 0.5em;
-
-//     background-repeat: no-repeat;
-//     background-position: center center;
-//     background-size: 50% 50%;
-//   }
-
-//   .header__input:checked::before {
-//     border-color: #0b76ef;
-//     background-color: #0b76ef;
-//     background-image: url(./moon-icon.svg);
-//   }
-
-
 .switch {
-  width: 32px;
-  height: 26px;
+  width: 30px;
+  height: 25px;
   display: block;
   position: relative;
 

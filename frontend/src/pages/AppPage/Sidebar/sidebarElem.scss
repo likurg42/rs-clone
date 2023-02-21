@@ -1,4 +1,5 @@
 .sidebar__elem {
+  width: 100%;
   all: unset;
   cursor: pointer;
   display: flex;
@@ -6,6 +7,7 @@
   align-items: center;
   padding: 7px 10px;
   box-sizing: border-box;
+  flex-grow: 1;
 
   &:hover {
     background-color: #eee;
@@ -21,16 +23,17 @@
   img {
     width: 24px;
     height: 24px;
-    padding: 0 5px 0 0;
+    margin: 0 5px 0 0;
     background-size: 24px 24px;
   }
 
   p {
     font-size: 13px;
+    color: var(--font-header-clr);
   }
 }
 
 .sidebar__count {
-  font-size: 10px;
+  font-size: 13px;
   color: grey;
 }

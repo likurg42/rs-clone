@@ -1,6 +1,7 @@
 import './taskElem.scss';
 import { useEffect } from 'react';
-import { Delete16Regular } from '@fluentui/react-icons';
+// import { Checkmark12Filled, Delete16Regular } from '@fluentui/react-icons';
+import { Check2, Trash3 } from 'react-bootstrap-icons';
 import { removeTodo, updateTodo } from '../../../slice/todoSlice';
 import useAuth from '../../../hooks/useAuth';
 import { useAppDispatch } from '../../../hooks/todoHook';
@@ -42,11 +43,18 @@ const TaskElem = ({ task }: TaskElemProps) => {
 
   return (
     <div className="taskElem">
-      <input type="checkbox" onChange={handleComplete} checked={task.completed} />
-      <p>{task.title}</p>
+      <div>
+        <label className="taskElem__label">
+          <input className="taskElem__input" type="checkbox" onChange={handleComplete} checked={task.completed} />
+          <span className="taskElem__checkbox-wrapper">
+            <Check2 className="taskElem__checkbox" />
+          </span>
+          <p className="taskElem__title">{task.title}</p>
+        </label>
+      </div>
       <button className="button" type="button" onClick={handleDelete}>
         <span className="visually-hidden">Delete</span>
-        <Delete16Regular />
+        <Trash3 className="trash" />
       </button>
     </div>
   );
