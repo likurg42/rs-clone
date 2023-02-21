@@ -1,5 +1,7 @@
 import './appPage.scss';
 import { useEffect } from 'react';
+import cn from 'classnames';
+import useTheme from '../../hooks/useTheme';
 import HeaderApp from './HeaderApp/HeaderApp';
 import Sidebar from './Sidebar/Sidebar';
 import Tasks from './Tasks/Tasks';
@@ -17,8 +19,14 @@ const TasksPage = () => {
     dispatch(fetchProjects({ headers: getHeaders() }));
   }, [dispatch, getHeaders]);
 
+  const { theme } = useTheme();
+
+  const themeClass = cn('full-page', {
+    [`theme-${theme}`]: theme,
+  });
+
   return (
-    <div>
+    <div className={themeClass}>
       <HeaderApp />
       <div className="main-page">
         <Sidebar projects={projects} />
