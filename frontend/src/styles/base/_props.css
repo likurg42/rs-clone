@@ -1,6 +1,26 @@
 :root {
   /* Colors */
+  --white: white;
+  --black: black;
   --primary-400: #ee5244;
+  --gray-50:#fafafa;  
+  --gray-100: #e3e3e3;
+  --gray-200: #808080;
+  --gray-400: #363636;
+  --gray-A400: #ffffff8f;
+  --dark-gray-700:#282828;
+  --dark-gray-800:#242424;
+  --dark-gray-900:#202020;
+
+  --header-background: var(--primary-400);
+  --header-icons-bg-clr: var(--gray-A400);
+  --sidebar-background: var(--gray-50);
+  --main-page-background: var(--white);
+  --task-border-clr: var(--gray-100);
+  --checkbox-icon-bg-clr: var(--gray-200);
+  --trash-icon-bg-clr: var(--black);
+  --font-header-clr: var(--black);
+
 
   /* Fonts */
   --ff: "Hanken Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
