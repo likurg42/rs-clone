@@ -5,11 +5,20 @@ import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { AuthModule } from './auth/auth.module';
 import { TasksModule } from './tasks/tasks.module';
+import { Task } from "./tasks/tasks.model";
+import { ProjectsController } from './projects/projects.controller';
+import { ProjectsModule } from './projects/projects.module';
+import { Project } from "./projects/projects.model";
+import { ServeStaticModule } from "@nestjs/serve-static";
+import * as path from "path";
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: `.${process.env.NODE_ENV}.env`
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: path.resolve(process.env.STATIC_PATH)
     }),
     SequelizeModule.forRoot({
       dialect: 'postgres',
@@ -20,14 +29,19 @@ import { TasksModule } from './tasks/tasks.module';
       database: process.env.POSTGRES_DB,
       models: [
         User,
+        Task,
+        Project,
       ],
       autoLoadModels: true,
+      synchronize: true,
     }),
     UsersModule,
     AuthModule,
-    TasksModule
+    TasksModule,
+    ProjectsModule
   ],
-  controllers: [],
+  controllers: [ProjectsController],
   providers: [],
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
-  constructor(private jwtService: JwtService) { }
+  constructor(private jwtService: JwtService) {
+  }
 
   canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
     const req = context.switchToHttp().getRequest();
@@ -14,11 +15,8 @@ export class JwtAuthGuard implements CanActivate {
       const [bearer, token] = authHeader.split(' ');
       console.log({ bearer, token });
 
-      if (bearer !== 'Bearer' || !token) {
-        throw new UnauthorizedException({ message: 'Пользователь не авторизован' });
-      }
-
       const user = this.jwtService.verify(token);
+      console.log(user);
       req.user = user;
       return true;
     } catch (e) {

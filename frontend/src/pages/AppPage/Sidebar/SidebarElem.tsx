@@ -1,19 +1,20 @@
 import './sidebarElem.scss';
+import defaultIcon from './6.svg';
 
 type SideElemProps = {
-  readonly img: string;
-  readonly title: string;
-  readonly count: string;
+  title: string;
+  icon: string | null;
+  handleClick: () => void;
 };
 
-const SidebarElem: React.FC<SideElemProps> = ({ img, title, count } : SideElemProps) => (
-  <div className="sidebar__elem">
+const SidebarElem = ({ title, handleClick, icon }: SideElemProps) => (
+  <button type="button" className="sidebar__elem" onClick={handleClick}>
     <div className="sidebar__title">
-      <img src={img} alt="" />
+      <img src={icon ?? defaultIcon} alt={title} />
       <p>{title}</p>
     </div>
-    <div className="sidebar__count">{count}</div>
-  </div>
+    <div className="sidebar__count">{0}</div>
+  </button>
 );
 
 export default SidebarElem;

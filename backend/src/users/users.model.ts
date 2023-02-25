@@ -1,5 +1,7 @@
-import { Column, Model, Table, DataType } from 'sequelize-typescript';
+import { Column, Model, Table, DataType, HasMany } from 'sequelize-typescript';
 import { ApiProperty } from '@nestjs/swagger';
+import { Task } from "../tasks/tasks.model";
+import { Project } from "../projects/projects.model";
 
 interface UserCreationAttrs {
   email: string;
@@ -19,4 +21,10 @@ export class User extends Model<User, UserCreationAttrs> {
   @ApiProperty({ example: '123456', description: 'Password' })
   @Column({ type: DataType.STRING, allowNull: false })
   password: string;
+
+  @HasMany(() => Task)
+  tasks: Task[];
+
+  @HasMany(() => Project)
+  projects: Project[];
 }

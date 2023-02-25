@@ -1,0 +1,12 @@
+.theme-dark{
+  /* Colors */
+
+  --header-background: var(--dark-gray-700);
+  --header-icons-bg-clr: var(--gray-50);
+  --sidebar-background: var(--dark-gray-800);
+  --main-page-background: var(--dark-gray-900);
+  --task-border-clr: var(--gray-300);
+  --checkbox-icon-bg-clr: var(--gray-200);
+  --trash-icon-bg-clr: var(--gray-200);
+  --font-header-clr: var(--gray-50)
+}

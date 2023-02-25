@@ -11,7 +11,8 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
-  ) { }
+  ) {
+  }
 
   async login(userDto: CreateUserDto) {
     const user = await this.validateUser(userDto);
@@ -41,12 +42,17 @@ export class AuthService {
 
   private async validateUser(userDto: CreateUserDto) {
     const user = await this.usersService.findUserByEmail(userDto.email);
-    const passwordEquals = await bcrypt.compare(userDto.password, user.password);
 
-    if (user && passwordEquals) {
-      return user;
+    if (!user) {
+      throw new UnauthorizedException({ message: 'Invalid username or password' });
     }
 
-    throw new UnauthorizedException({ message: 'Некорректный email или пароль' });
+    const passwordEquals = await bcrypt.compare(userDto.password, user.password);
+
+    if (!passwordEquals) {
+      throw new UnauthorizedException({ message: 'Invalid username or password' });
+    }
+
+    return user;
   }
 }

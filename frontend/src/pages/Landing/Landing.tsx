@@ -83,7 +83,7 @@ const Landing: React.FC = () => (
                 <img
                   className="content__brand"
                   src={rss}
-                  alt="apple"
+                  alt="RSS school"
                 />
                 <img
                   className="content__brand"
