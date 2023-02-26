@@ -17,16 +17,17 @@ type FormProps = {
 };
 
 const AddTaskForm = ({ form }: FormProps) => {
+  const [projectDefaultValue, setProjectDefaultValue] = useState<undefined | number>(undefined);
   const [show, setShow] = useState(false);
   const {
     handleSubmit, values, handleChange, handleBlur,
   } = form;
   const { projects, currentProjectId } = useProjects();
 
-  const getDefaultValue = () => (currentProjectId === null ? undefined : currentProjectId);
-
+  console.log({ projectDefaultValue }, { values });
   useEffect(() => {
     setShow(false);
+    setProjectDefaultValue(currentProjectId === null ? undefined : currentProjectId);
   }, [currentProjectId]);
 
   return (show ? (
@@ -56,7 +57,6 @@ const AddTaskForm = ({ form }: FormProps) => {
           name="projectId"
           value={values.projectId}
           onChange={handleChange}
-          defaultValue={getDefaultValue()}
         >
           <option value={undefined}>Inbox</option>
           {projects && projects.map(({ title, id }) => (

@@ -9,13 +9,14 @@ import TaskForm, { TaskFormValues } from '../TaskForm/TaskForm';
 import useAuth from '../../../hooks/useAuth';
 
 const Tasks = () => {
-  const { currentProject } = useProjects();
+  const { currentProject, currentProjectId } = useProjects();
   const { fetchTodos, addNewTodo, todos } = useTodos();
   const { getHeaders } = useAuth();
 
   const onSubmit = async (body: TaskFormValues, formikHelpers: FormikHelpers<TaskFormValues>) => {
     const { resetForm } = formikHelpers;
     const { title, projectId } = body;
+    console.log({ body });
     try {
       await addNewTodo({
         todo: {
@@ -31,12 +32,17 @@ const Tasks = () => {
     }
   };
 
-  const initialValues: TaskFormValues = { title: '', description: '', projectId: undefined };
+  const initialValues: TaskFormValues = {
+    title: '',
+    description: '',
+    projectId: currentProjectId === null ? undefined : currentProjectId,
+  };
 
   const form = useFormik({
     initialValues,
     onSubmit,
     validationSchema: getTaskSchema(),
+    enableReinitialize: true,
   });
 
   useEffect(() => {
