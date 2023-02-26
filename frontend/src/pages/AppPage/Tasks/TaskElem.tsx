@@ -1,6 +1,4 @@
 import './taskElem.scss';
-import { useEffect } from 'react';
-// import { Checkmark12Filled, Delete16Regular } from '@fluentui/react-icons';
 import { Check2, Trash3 } from 'react-bootstrap-icons';
 import useTodos from '../../../hooks/useTodos';
 import useAuth from '../../../hooks/useAuth';
@@ -35,10 +33,6 @@ const TaskElem = ({ task }: TaskElemProps) => {
       headers: getHeaders(),
     });
   };
-
-  useEffect(() => {
-    console.log(task);
-  });
 
   return (
     <div className="taskElem">

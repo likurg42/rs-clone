@@ -10,15 +10,15 @@ const init = () => {
   const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
   root.render(
-    // <React.StrictMode>
-    <AuthProvider>
-      <ThemeProvider>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </ThemeProvider>
-    </AuthProvider>,
-    // </React.StrictMode>,
+    <React.StrictMode>
+      <AuthProvider>
+        <ThemeProvider>
+          <Provider store={store}>
+            <App />
+          </Provider>
+        </ThemeProvider>
+      </AuthProvider>
+    </React.StrictMode>,
   );
 };
 
