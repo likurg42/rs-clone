@@ -7,7 +7,7 @@ import UserForm from '../../components/UserForm/UserForm';
 import HeaderAuthorization from '../../components/HeaderAuthorization/HeaderAuthorization';
 import Footer from '../../components/Footer/Footer';
 import ButtonLink from '../../components/ButtonLink/ButtonLink';
-import getValidationSchema from '../../schemas/validationSchema';
+import getLoginSchema from '../../schemas/loginSchema';
 import routes from '../../routes/routes';
 import useAuth from '../../hooks/useAuth';
 
@@ -41,7 +41,7 @@ const SignupPage: React.FC = () => {
   const form = useFormik({
     initialValues: { email: '', password: '' },
     onSubmit,
-    validationSchema: getValidationSchema(),
+    validationSchema: getLoginSchema(),
   });
 
   return (

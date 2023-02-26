@@ -5,9 +5,9 @@ import {
 import { useState } from 'react';
 
 type FormProps = {
-  readonly form: FormikProps<FormValues>
-  readonly errorServer: boolean
-  readonly deleteError: () => void
+  readonly form: FormikProps<FormValues>;
+  readonly errorServer: boolean;
+  readonly deleteError: () => void;
 };
 interface FormValues {
   readonly email: string;

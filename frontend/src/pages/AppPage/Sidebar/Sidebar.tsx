@@ -1,29 +1,35 @@
 import './sidebar.scss';
+import useTodos from '../../../hooks/useTodos';
 import SidebarElem from './SidebarElem';
 import iconOne from './1.svg';
 import { Project } from '../../../types/projectType';
-import { useAppDispatch } from '../../../hooks/todoHook';
-import { changeCurrentProject } from '../../../slice/projectSlice';
+import useProjects from '../../../hooks/useProjects';
 
 type SidebarProps = {
-  readonly projects: Project[]
+  readonly projects: Project[];
 };
 
 const Sidebar = ({ projects }: SidebarProps) => {
-  const dispatch = useAppDispatch();
+  const { changeCurrentProject } = useProjects();
+  const { amountOfTodosInbox } = useTodos();
 
   const handleProjectChange = (project?: Project) => () => {
     if (project) {
-      dispatch(changeCurrentProject(project.id));
+      changeCurrentProject(project.id);
     } else {
-      dispatch(changeCurrentProject(null));
+      changeCurrentProject(null);
     }
   };
 
   return (
     <div className="sidebar">
       <div className="sidebar__filter">
-        <SidebarElem icon={iconOne} title="Inbox" handleClick={handleProjectChange()} />
+        <SidebarElem
+          icon={iconOne}
+          title="Inbox"
+          handleClick={handleProjectChange()}
+          amount={amountOfTodosInbox}
+        />
       </div>
 
       <div className="sidebar__projects">
@@ -35,6 +41,7 @@ const Sidebar = ({ projects }: SidebarProps) => {
             icon={null}
             key={project.id}
             title={project.title}
+            amount={project.tasks.length}
             handleClick={handleProjectChange(project)}
           />
         ))}

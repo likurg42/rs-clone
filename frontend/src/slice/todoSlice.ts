@@ -32,12 +32,14 @@ export const createSerializedError = (e: unknown): SerializedError => {
   };
 };
 
+export type FetchTodoPayload = {
+  headers: { Authorization?: string; };
+};
+
 export const fetchTodos = createAsyncThunk<
   Todo[],
-  {
-    headers: { Authorization?: string }
-  },
-  { readonly rejectValue: SerializedError | Error }
+  FetchTodoPayload,
+  { readonly rejectValue: SerializedError | Error; }
 >(
   'tasks/fetch',
   async ({ headers }, { rejectWithValue }) => {
@@ -51,13 +53,15 @@ export const fetchTodos = createAsyncThunk<
   },
 );
 
+export type AddNewTodoPayload = {
+  todo: CreateTodo,
+  headers: { Authorization?: string; },
+};
+
 export const addNewTodo = createAsyncThunk<
   Todo,
-  {
-    todo: CreateTodo,
-    headers: { Authorization?: string },
-  },
-  { readonly rejectValue: SerializedError | Error }
+  AddNewTodoPayload,
+  { readonly rejectValue: SerializedError | Error; }
 >(
   'tasks/add',
   async ({ todo, headers }, { rejectWithValue }) => {
@@ -71,14 +75,16 @@ export const addNewTodo = createAsyncThunk<
   },
 );
 
+export type UpdateTodoPayload = {
+  id: number,
+  todoDto: TodoDto,
+  headers: { Authorization?: string; },
+};
+
 export const updateTodo = createAsyncThunk<
   Todo,
-  {
-    id: number,
-    todoDto: TodoDto,
-    headers: { Authorization?: string },
-  },
-  { readonly rejectValue: SerializedError }
+  UpdateTodoPayload,
+  { readonly rejectValue: SerializedError; }
 >(
   'tasks/toggle',
   async ({ id, todoDto, headers }, { rejectWithValue }) => {
@@ -92,13 +98,15 @@ export const updateTodo = createAsyncThunk<
   },
 );
 
+export type RemoveTodoPayload = {
+  id: number,
+  headers: { Authorization?: string; },
+};
+
 export const removeTodo = createAsyncThunk<
   number,
-  {
-    id: number,
-    headers: { Authorization?: string },
-  },
-  { readonly rejectValue: SerializedError }
+  RemoveTodoPayload,
+  { readonly rejectValue: SerializedError; }
 >(
   'tasks/remove',
   async ({ id, headers }, { rejectWithValue }) => {
