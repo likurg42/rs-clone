@@ -15,6 +15,7 @@ import { Todo } from '../types/todoType';
 
 interface UseTodos {
   todos: Todo[];
+  amountOfTodosInbox: number;
   fetchTodos: (payload: FetchTodoPayload) => void;
   removeTodo: (payload: RemoveTodoPayload) => void;
   updateTodo: (payload: UpdateTodoPayload) => void;
@@ -29,6 +30,12 @@ const useTodos = (): UseTodos => {
     ),
   );
 
+  const amountOfTodosInbox = useAppSelector(
+    (state: RootState) => state.todos.list.filter(
+      (todo) => todo.projectId === null,
+    ).length,
+  );
+
   const actions = useMemo(() => bindActionCreators(
     {
       fetchTodos, updateTodo, removeTodo, addNewTodo,
@@ -38,6 +45,7 @@ const useTodos = (): UseTodos => {
 
   return {
     todos,
+    amountOfTodosInbox,
     ...actions,
   };
 };

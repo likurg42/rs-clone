@@ -1,4 +1,5 @@
 import './sidebar.scss';
+import useTodos from '../../../hooks/useTodos';
 import SidebarElem from './SidebarElem';
 import iconOne from './1.svg';
 import { Project } from '../../../types/projectType';
@@ -10,6 +11,7 @@ type SidebarProps = {
 
 const Sidebar = ({ projects }: SidebarProps) => {
   const { changeCurrentProject } = useProjects();
+  const { amountOfTodosInbox } = useTodos();
 
   const handleProjectChange = (project?: Project) => () => {
     if (project) {
@@ -22,7 +24,12 @@ const Sidebar = ({ projects }: SidebarProps) => {
   return (
     <div className="sidebar">
       <div className="sidebar__filter">
-        <SidebarElem icon={iconOne} title="Inbox" handleClick={handleProjectChange()} />
+        <SidebarElem
+          icon={iconOne}
+          title="Inbox"
+          handleClick={handleProjectChange()}
+          amount={amountOfTodosInbox}
+        />
       </div>
 
       <div className="sidebar__projects">
@@ -34,6 +41,7 @@ const Sidebar = ({ projects }: SidebarProps) => {
             icon={null}
             key={project.id}
             title={project.title}
+            amount={project.tasks.length}
             handleClick={handleProjectChange(project)}
           />
         ))}
