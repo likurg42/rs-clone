@@ -41,10 +41,9 @@ const AddTaskForm = ({ form }: FormProps) => {
         onChange={handleChange}
         onBlur={handleBlur}
       />
-      <input
+      <textarea
         name="description"
         className="input__form"
-        type="text"
         placeholder="Description"
         value={values.description}
         onChange={handleChange}
