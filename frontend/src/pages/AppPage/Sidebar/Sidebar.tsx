@@ -2,21 +2,20 @@ import './sidebar.scss';
 import SidebarElem from './SidebarElem';
 import iconOne from './1.svg';
 import { Project } from '../../../types/projectType';
-import { useAppDispatch } from '../../../hooks/todoHook';
-import { changeCurrentProject } from '../../../slice/projectSlice';
+import useProjects from '../../../hooks/useProjects';
 
 type SidebarProps = {
-  readonly projects: Project[]
+  readonly projects: Project[];
 };
 
 const Sidebar = ({ projects }: SidebarProps) => {
-  const dispatch = useAppDispatch();
+  const { changeCurrentProject } = useProjects();
 
   const handleProjectChange = (project?: Project) => () => {
     if (project) {
-      dispatch(changeCurrentProject(project.id));
+      changeCurrentProject(project.id);
     } else {
-      dispatch(changeCurrentProject(null));
+      changeCurrentProject(null);
     }
   };
 

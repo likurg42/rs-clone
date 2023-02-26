@@ -8,7 +8,7 @@ import loginImg from './login.png';
 import Footer from '../../components/Footer/Footer';
 import ButtonLink from '../../components/ButtonLink/ButtonLink';
 import UserForm from '../../components/UserForm/UserForm';
-import getValidationSchema from '../../schemas/validationSchema';
+import getLoginSchema from '../../schemas/loginSchema';
 import useAuth from '../../hooks/useAuth';
 import routes from '../../routes/routes';
 
@@ -46,7 +46,7 @@ const LoginPage: React.FC = () => {
   const form = useFormik({
     initialValues: { email: '', password: '' },
     onSubmit,
-    validationSchema: getValidationSchema(),
+    validationSchema: getLoginSchema(),
   });
 
   return (
