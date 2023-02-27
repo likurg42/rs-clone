@@ -5,11 +5,13 @@ import iconAdd from './add.svg';
 import './TaskForm.scss';
 import closeImg from './close.svg';
 import sendImg from './send.svg';
+import useContexts from '../../../hooks/useContexts';
 
 export type TaskFormValues = {
   readonly title: string;
   readonly description: string;
   readonly projectId: number | undefined;
+  readonly contextId: number | undefined;
 };
 
 type FormProps = {
@@ -17,18 +19,16 @@ type FormProps = {
 };
 
 const AddTaskForm = ({ form }: FormProps) => {
-  const [projectDefaultValue, setProjectDefaultValue] = useState<undefined | number>(undefined);
   const [show, setShow] = useState(false);
   const {
     handleSubmit, values, handleChange, handleBlur,
   } = form;
   const { projects, currentProjectId } = useProjects();
+  const { contexts, currentContextId } = useContexts();
 
-  console.log({ projectDefaultValue }, { values });
   useEffect(() => {
     setShow(false);
-    setProjectDefaultValue(currentProjectId === null ? undefined : currentProjectId);
-  }, [currentProjectId]);
+  }, [currentProjectId, currentContextId]);
 
   return (show ? (
     <form className="add__form" onSubmit={handleSubmit}>
@@ -59,6 +59,17 @@ const AddTaskForm = ({ form }: FormProps) => {
         >
           <option value={undefined}>Inbox</option>
           {projects && projects.map(({ title, id }) => (
+            <option value={id} key={id}>{title}</option>
+          ))}
+        </select>
+        <select
+          className="select__form"
+          name="contextId"
+          value={values.contextId}
+          onChange={handleChange}
+        >
+          <option value={undefined}>No context</option>
+          {contexts && contexts.map(({ title, id }) => (
             <option value={id} key={id}>{title}</option>
           ))}
         </select>

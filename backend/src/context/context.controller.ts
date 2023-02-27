@@ -24,7 +24,7 @@ type ValidatedRequest = Request & {
 };
 
 @ApiTags('Context')
-@Controller('api/context')
+@Controller('api/contexts')
 export class ContextController {
   constructor(
     private contextService: ContextService,
@@ -42,7 +42,7 @@ export class ContextController {
   @Get()
   @UseGuards(JwtAuthGuard)
   getUserTags(@Req() req: ValidatedRequest) {
-    return this.contextService.findUserTags(req.user.id);
+    return this.contextService.find(req.user.id);
   }
 
   @ApiOperation({ summary: 'Create context' })

@@ -4,13 +4,17 @@ import SidebarElem from './SidebarElem';
 import iconOne from './1.svg';
 import { Project } from '../../../types/projectType';
 import useProjects from '../../../hooks/useProjects';
+import { Context } from '../../../types/contextType';
+import useContexts from '../../../hooks/useContexts';
 
 type SidebarProps = {
   readonly projects: Project[];
+  readonly contexts: Context[];
 };
 
-const Sidebar = ({ projects }: SidebarProps) => {
+const Sidebar = ({ projects, contexts }: SidebarProps) => {
   const { changeCurrentProject } = useProjects();
+  const { changeCurrentContext } = useContexts();
   const { amountOfTodosInbox } = useTodos();
 
   const handleProjectChange = (project?: Project) => () => {
@@ -19,6 +23,10 @@ const Sidebar = ({ projects }: SidebarProps) => {
     } else {
       changeCurrentProject(null);
     }
+  };
+
+  const handleContextChange = (context: Context) => () => {
+    changeCurrentContext(context.id);
   };
 
   return (
@@ -43,6 +51,18 @@ const Sidebar = ({ projects }: SidebarProps) => {
             title={project.title}
             amount={project.tasks.length}
             handleClick={handleProjectChange(project)}
+          />
+        ))}
+        <div className="sidebar__header">
+          <p>Contexts</p>
+        </div>
+        {contexts.map((context) => (
+          <SidebarElem
+            icon={null}
+            key={context.id}
+            title={context.title}
+            amount={context.tasks.length}
+            handleClick={handleContextChange(context)}
           />
         ))}
       </div>

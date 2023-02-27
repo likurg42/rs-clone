@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { BelongsTo, Column, DataType, ForeignKey, HasMany, Table, Model, BelongsToMany } from 'sequelize-typescript';
+import { Task } from '../tasks/tasks.model';
 import { User } from '../users/users.model';
 
 interface TagCreationAttrs {
@@ -31,6 +32,9 @@ export class Context extends Model<Context, TagCreationAttrs> {
   @ForeignKey(() => User)
   @Column({ type: DataType.INTEGER })
   userId: number;
+
+  @HasMany(() => Task)
+  tasks: Task[];
 
   @BelongsTo(() => User)
   user: User;

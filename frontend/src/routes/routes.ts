@@ -13,6 +13,7 @@ const routes = {
     tasks: () => [API_PREFIX, 'tasks'].join('/'),
     task: (taskID = '') => [API_PREFIX, 'tasks', taskID].join('/'),
     projects: () => [API_PREFIX, 'projects'].join('/'),
+    contexts: () => [API_PREFIX, 'contexts'].join('/'),
   },
 };
 

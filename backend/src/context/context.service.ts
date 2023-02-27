@@ -8,7 +8,7 @@ import { UpdateContextDto } from './dto/update-context.dto';
 export class ContextService {
   constructor(@InjectModel(Context) private contextRepository: typeof Context) { }
 
-  async findUserTags(userId: number) {
+  async find(userId: number) {
     return await this.contextRepository.findAll({ where: { userId }, include: { all: true } });
   }
 

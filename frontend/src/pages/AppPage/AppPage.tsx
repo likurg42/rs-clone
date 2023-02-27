@@ -7,15 +7,18 @@ import HeaderApp from './HeaderApp/HeaderApp';
 import Sidebar from './Sidebar/Sidebar';
 import Tasks from './Tasks/Tasks';
 import useAuth from '../../hooks/useAuth';
+import useContexts from '../../hooks/useContexts';
 
 const AppPage = () => {
   const { theme } = useTheme();
   const { getHeaders } = useAuth();
   const { fetchProjects, projects } = useProjects();
+  const { fetchContexts, contexts } = useContexts();
 
   useEffect(() => {
     fetchProjects({ headers: getHeaders() });
-  }, [fetchProjects, getHeaders]);
+    fetchContexts({ headers: getHeaders() });
+  }, [fetchProjects, fetchContexts, getHeaders]);
 
   const themeClass = cn('full-page', {
     [`theme-${theme}`]: theme,
@@ -25,7 +28,7 @@ const AppPage = () => {
     <div className={themeClass}>
       <HeaderApp />
       <div className="main-page">
-        <Sidebar projects={projects} />
+        <Sidebar projects={projects} contexts={contexts} />
         <div className="main-tasks">
           <Tasks />
         </div>

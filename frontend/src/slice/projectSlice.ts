@@ -5,7 +5,9 @@ import axios from 'axios';
 import routes from '../routes/routes';
 
 import { Project } from '../types/projectType';
-import { createSerializedError, isError, SerializedError } from './todoSlice';
+// eslint-disable-next-line import/no-cycle
+import { changeCurrentContext } from './contextSlice';
+import { createSerializedError, isError, SerializedError } from './sliceUtils';
 
 export type FetchProjectsPayload = {
   headers: { Authorization?: string; };
@@ -60,6 +62,9 @@ const projectSlice = createSlice({
       .addCase(fetchProjects.fulfilled, (state, action) => {
         state.list = action.payload;
         state.loading = false;
+      })
+      .addCase(changeCurrentContext, (state) => {
+        state.currentProjectId = null;
       })
       .addMatcher(isError, (state, action: PayloadAction<string>) => {
         state.loading = false;

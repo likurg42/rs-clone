@@ -20,7 +20,7 @@ const TaskElem = ({ task }: TaskElemProps) => {
   const handleComplete = () => {
     updateTodo({
       id: task.id,
-      todoDto: {
+      updateTodoDto: {
         completed: !task.completed,
       },
       headers: getHeaders(),
