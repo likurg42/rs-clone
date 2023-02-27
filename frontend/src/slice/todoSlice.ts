@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import routes from '../routes/routes';
 import { CreateTodoDto, Todo, UpdateTodoDto } from '../types/todoType';
-import { changeCurrentContext } from './contextSlice';
+import { changeCurrentContext, createContext, removeContext } from './contextSlice';
 import { changeCurrentProject, createProject, removeProject } from './projectSlice';
 import { createSerializedError, isError, SerializedError } from './sliceUtils';
 
@@ -161,6 +161,16 @@ const todoSlice = createSlice({
         };
       })
       .addCase(removeProject.fulfilled, (state) => {
+        state.currentList = state.list.filter((todo) => todo.projectId === null);
+      })
+      .addCase(createContext.fulfilled, (state, { payload }) => {
+        state.currentList = [];
+        state.currentListView = {
+          id: payload.id,
+          property: 'contextId',
+        };
+      })
+      .addCase(removeContext.fulfilled, (state) => {
         state.currentList = state.list.filter((todo) => todo.projectId === null);
       })
       .addCase(changeCurrentContext, (state, { payload: currentContextId }) => {
