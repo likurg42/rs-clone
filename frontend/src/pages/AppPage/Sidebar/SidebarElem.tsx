@@ -1,23 +1,35 @@
 import './sidebarElem.scss';
+import { Trash2Fill } from 'react-bootstrap-icons';
 import defaultIcon from './6.svg';
 
 type SideElemProps = {
   title: string;
   icon: string | null;
-  handleClick: () => void;
+  handleChange: () => void;
   amount: number;
+  handleRemove?: () => void;
 };
 
 const SidebarElem = ({
-  title, handleClick, icon, amount,
+  title, handleChange, icon, amount, handleRemove,
 }: SideElemProps) => (
-  <button type="button" className="sidebar__elem" onClick={handleClick}>
-    <div className="sidebar__title">
+  <div role="button" className="sidebar__elem">
+    <button type="button" className="sidebar__title" onClick={handleChange}>
       <img src={icon ?? defaultIcon} alt={title} />
       <p>{title}</p>
-    </div>
+    </button>
+    {handleRemove && (
+      <button className="sidebar__delete-button" type="button" onClick={handleRemove}>
+        <Trash2Fill />
+      </button>
+    )}
+
     <div className="sidebar__count">{amount}</div>
-  </button>
+  </div>
 );
+
+SidebarElem.defaultProps = {
+  handleRemove: undefined,
+};
 
 export default SidebarElem;

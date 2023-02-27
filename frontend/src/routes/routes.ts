@@ -11,8 +11,12 @@ const routes = {
     login: () => [API_PREFIX, 'auth', 'login'].join('/'),
     signup: () => [API_PREFIX, 'auth', 'signup'].join('/'),
     tasks: () => [API_PREFIX, 'tasks'].join('/'),
-    task: (taskID = '') => [API_PREFIX, 'tasks', taskID].join('/'),
+    task: (taskId = '') => [API_PREFIX, 'tasks', taskId].join('/'),
     projects: () => [API_PREFIX, 'projects'].join('/'),
+    project: (projectId = '') => [API_PREFIX, 'projects', projectId].join('/'),
+    contexts: () => [API_PREFIX, 'contexts'].join('/'),
+    context: (contextId = '') => [API_PREFIX, 'contexts', contextId].join('/'),
+
   },
 };
 

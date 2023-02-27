@@ -1,15 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { FormikProps } from 'formik';
 import useProjects from '../../../hooks/useProjects';
 import iconAdd from './add.svg';
 import './TaskForm.scss';
 import closeImg from './close.svg';
 import sendImg from './send.svg';
+import useContexts from '../../../hooks/useContexts';
 
 export type TaskFormValues = {
   readonly title: string;
   readonly description: string;
   readonly projectId: number | undefined;
+  readonly contextId: number | undefined;
 };
 
 type FormProps = {
@@ -17,21 +19,33 @@ type FormProps = {
 };
 
 const AddTaskForm = ({ form }: FormProps) => {
-  const [projectDefaultValue, setProjectDefaultValue] = useState<undefined | number>(undefined);
   const [show, setShow] = useState(false);
   const {
     handleSubmit, values, handleChange, handleBlur,
   } = form;
   const { projects, currentProjectId } = useProjects();
+  const { contexts, currentContextId } = useContexts();
+  const ref = useRef<HTMLFormElement>(null);
 
-  console.log({ projectDefaultValue }, { values });
   useEffect(() => {
     setShow(false);
-    setProjectDefaultValue(currentProjectId === null ? undefined : currentProjectId);
-  }, [currentProjectId]);
+  }, [currentProjectId, currentContextId]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: Event) => {
+      if (event.target && ref.current && !ref.current.contains((event.target as Node))) {
+        setShow(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [ref]);
 
   return (show ? (
-    <form className="add__form" onSubmit={handleSubmit}>
+    <form className="add__form" onSubmit={handleSubmit} ref={ref}>
       <input
         name="title"
         className="input__form"
@@ -40,14 +54,7 @@ const AddTaskForm = ({ form }: FormProps) => {
         value={values.title}
         onChange={handleChange}
         onBlur={handleBlur}
-      />
-      <textarea
-        name="description"
-        className="input__form"
-        placeholder="Description"
-        value={values.description}
-        onChange={handleChange}
-        onBlur={handleBlur}
+        autoFocus
       />
       <div className="line__form" />
       <div className="footer__form">
@@ -59,6 +66,17 @@ const AddTaskForm = ({ form }: FormProps) => {
         >
           <option value={undefined}>Inbox</option>
           {projects && projects.map(({ title, id }) => (
+            <option value={id} key={id}>{title}</option>
+          ))}
+        </select>
+        <select
+          className="select__form"
+          name="contextId"
+          value={values.contextId}
+          onChange={handleChange}
+        >
+          <option value={undefined}>No context</option>
+          {contexts && contexts.map(({ title, id }) => (
             <option value={id} key={id}>{title}</option>
           ))}
         </select>
@@ -84,7 +102,7 @@ const AddTaskForm = ({ form }: FormProps) => {
   ) : (
     <button type="button" className="add__task" onClick={() => setShow(true)}>
       <img src={iconAdd} alt="" />
-      <p className="add__text">Add</p>
+      <span className="add__text">Add</span>
     </button>
   ));
 };

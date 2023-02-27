@@ -4,14 +4,22 @@ import SidebarElem from './SidebarElem';
 import iconOne from './1.svg';
 import { Project } from '../../../types/projectType';
 import useProjects from '../../../hooks/useProjects';
+import { Context } from '../../../types/contextType';
+import useContexts from '../../../hooks/useContexts';
+import AddContext from './AddContext';
+import AddProject from './AddProject';
+import useAuth from '../../../hooks/useAuth';
 
 type SidebarProps = {
   readonly projects: Project[];
+  readonly contexts: Context[];
 };
 
-const Sidebar = ({ projects }: SidebarProps) => {
-  const { changeCurrentProject } = useProjects();
+const Sidebar = ({ projects, contexts }: SidebarProps) => {
+  const { changeCurrentProject, removeProject } = useProjects();
+  const { changeCurrentContext, removeContext } = useContexts();
   const { amountOfTodosInbox } = useTodos();
+  const { getHeaders } = useAuth();
 
   const handleProjectChange = (project?: Project) => () => {
     if (project) {
@@ -21,13 +29,31 @@ const Sidebar = ({ projects }: SidebarProps) => {
     }
   };
 
+  const handleContextChange = (context: Context) => () => {
+    changeCurrentContext(context.id);
+  };
+
+  const handleProjectRemove = (project: Project) => () => {
+    removeProject({
+      headers: getHeaders(),
+      id: project.id,
+    });
+  };
+
+  const handleContextRemove = (context: Context) => () => {
+    removeContext({
+      headers: getHeaders(),
+      id: context.id,
+    });
+  };
+
   return (
     <div className="sidebar">
       <div className="sidebar__filter">
         <SidebarElem
           icon={iconOne}
           title="Inbox"
-          handleClick={handleProjectChange()}
+          handleChange={handleProjectChange()}
           amount={amountOfTodosInbox}
         />
       </div>
@@ -36,15 +62,32 @@ const Sidebar = ({ projects }: SidebarProps) => {
         <div className="sidebar__header">
           <p>Projects</p>
         </div>
-        {projects.map((project) => (
+        {projects && projects.map((project) => (
           <SidebarElem
             icon={null}
             key={project.id}
             title={project.title}
             amount={project.tasks.length}
-            handleClick={handleProjectChange(project)}
+            handleChange={handleProjectChange(project)}
+            handleRemove={handleProjectRemove(project)}
+
           />
         ))}
+        <AddProject />
+        <div className="sidebar__header">
+          <p>Contexts</p>
+        </div>
+        {contexts && contexts.map((context) => (
+          <SidebarElem
+            icon={null}
+            key={context.id}
+            title={context.title}
+            amount={context.tasks.length}
+            handleChange={handleContextChange(context)}
+            handleRemove={handleContextRemove(context)}
+          />
+        ))}
+        <AddContext />
       </div>
     </div>
   );

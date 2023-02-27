@@ -13,33 +13,35 @@ export class TasksService {
     return await this.taskRepository.create({ ...createTaskDto, userId });
   }
 
-  async findUserTasks(userId) {
-    return await this.taskRepository.findAll({ where: { userId } });
+  async findUserTasks(userId: number) {
+    return await this.taskRepository.findAll({ where: { userId }, include: { all: true } });
   }
 
   async updateTask(updateTaskDto: UpdateTaskDto, taskId: number, userId: number) {
-    const belongs = await this.isTaskBelongsToUser(taskId, userId)
+    const belongs = await this.isTaskBelongsToUser(taskId, userId);
     if (!belongs) {
-      throw new UnauthorizedException('User is unauthorized')
+      throw new UnauthorizedException('User is unauthorized');
     }
 
     return await this.taskRepository.update(updateTaskDto, {
       where: { id: taskId },
       returning: true,
-    })
+    });
   }
 
   async deleteTask(taskId: number, userId: number) {
-    const belongs = await this.isTaskBelongsToUser(taskId, userId)
+    console.log({ userId });
+    const belongs = await this.isTaskBelongsToUser(taskId, userId);
+
     if (!belongs) {
-      throw new UnauthorizedException('User is unauthorized')
+      throw new UnauthorizedException('User is unauthorized');
     }
 
-    return await this.taskRepository.destroy({ where: { id: taskId } })
+    return await this.taskRepository.destroy({ where: { id: taskId } });
   }
 
   private async isTaskBelongsToUser(taskId: number, userId: number) {
-    const task = await this.taskRepository.findOne({ where: { id: taskId } })
+    const task = await this.taskRepository.findOne({ where: { id: taskId } });
 
     return task.userId === userId;
   }

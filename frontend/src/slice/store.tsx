@@ -2,11 +2,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import todoReducer from './todoSlice';
 import projectReducer from './projectSlice';
+import contextReducer from './contextSlice';
 
 const store = configureStore({
   reducer: {
     todos: todoReducer,
     projects: projectReducer,
+    contexts: contextReducer,
   },
 });
 

@@ -8,5 +8,5 @@ export class CreateProjectDto {
   readonly userId: number;
 
   @ApiProperty({ example: 'My new super project', description: 'Project description' })
-  readonly description: string;
+  readonly description?: string;
 }

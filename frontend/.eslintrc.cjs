@@ -4,7 +4,6 @@ module.exports = {
   'plugins': [
     'react',
     'react-hooks',
-    // "jsx-a11y",
     'functional',
     'import',
     '@typescript-eslint',
@@ -17,7 +16,6 @@ module.exports = {
     'plugin:import/typescript',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
-    // "plugin:functional/recommended",
     'plugin:@typescript-eslint/recommended',
   ],
   'parserOptions': {
@@ -35,18 +33,12 @@ module.exports = {
     'node': true,
   },
   'rules': {
+    'jsx-a11y/click-events-have-key-events': [0],
+    'jsx-a11y/interactive-supports-focus': [0],
+    'jsx-a11y/label-has-associated-control': [0],
+    'jsx-a11y/no-autofocus': [0],
     '@typescript-eslint/indent': ['error', 2, {
       ignoredNodes: ['TSTypeParameterInstantiation'],
-    }],
-    'jsx-a11y/label-has-associated-control': ['error', {
-      'required': {
-        'some': ['nesting', 'id'],
-      },
-    }],
-    'jsx-a11y/label-has-for': ['error', {
-      'required': {
-        'some': ['nesting', 'id'],
-      },
     }],
     '@typescript-eslint/no-explicit-any': 'error',
     'no-console': 0,

@@ -6,12 +6,13 @@ import { Task } from './tasks.model';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { AuthModule } from '../auth/auth.module';
 import { Project } from "../projects/projects.model";
+import { Context } from '../context/context.model';
 
 @Module({
   controllers: [TasksController],
   providers: [TasksService],
   imports: [
-    SequelizeModule.forFeature([User, Task, Project]),
+    SequelizeModule.forFeature([User, Task, Project, Context]),
     forwardRef(() => AuthModule)
   ],
   exports: [TasksService]

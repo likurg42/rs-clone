@@ -3,7 +3,8 @@ export type Todo = {
   readonly title: string;
   readonly completed: boolean;
   readonly projectId: number | null;
+  readonly contextId: number | null;
 };
 
-export type TodoDto = Partial<Todo>;
-export type CreateTodo = Omit<Todo, 'id'>;
+export type CreateTodoDto = Omit<Todo, 'id'>;
+export type UpdateTodoDto = Partial<CreateTodoDto>;

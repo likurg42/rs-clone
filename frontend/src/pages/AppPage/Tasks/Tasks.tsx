@@ -7,35 +7,39 @@ import useProjects from '../../../hooks/useProjects';
 import TaskElem from './TaskElem';
 import TaskForm, { TaskFormValues } from '../TaskForm/TaskForm';
 import useAuth from '../../../hooks/useAuth';
+import useContexts from '../../../hooks/useContexts';
 
 const Tasks = () => {
-  const { currentProject, currentProjectId } = useProjects();
-  const { fetchTodos, addNewTodo, todos } = useTodos();
+  const { currentProjectId } = useProjects();
+  const { currentContextId } = useContexts();
+  const { currentListViewId } = useTodos();
+  const {
+    fetchTodos, addNewTodo, todos, currentTitle,
+  } = useTodos();
   const { getHeaders } = useAuth();
 
   const onSubmit = async (body: TaskFormValues, formikHelpers: FormikHelpers<TaskFormValues>) => {
     const { resetForm } = formikHelpers;
-    const { title, projectId } = body;
-    console.log({ body });
-    try {
-      await addNewTodo({
-        todo: {
-          title,
-          completed: false,
-          projectId: projectId === undefined ? null : projectId,
-        },
-        headers: getHeaders(),
-      });
-      resetForm();
-    } catch (e) {
-      console.log(e);
-    }
+    const { title, projectId, contextId } = body;
+    addNewTodo({
+      createTodoDto: {
+        title,
+        completed: false,
+        projectId: projectId === undefined ? null : projectId,
+        contextId: contextId === undefined ? null : contextId,
+      },
+      headers: getHeaders(),
+    });
+    resetForm();
   };
 
   const initialValues: TaskFormValues = {
     title: '',
     description: '',
-    projectId: currentProjectId === null ? undefined : currentProjectId,
+    projectId: currentProjectId !== null
+      && currentProjectId === currentListViewId ? currentProjectId : undefined,
+    contextId: currentContextId !== null
+      && currentContextId === currentListViewId ? currentContextId : undefined,
   };
 
   const form = useFormik({
@@ -51,7 +55,7 @@ const Tasks = () => {
 
   return (
     <div className="tasks">
-      <h2 className="tasks__header">{currentProject ? currentProject.title : 'Inbox'}</h2>
+      <h2 className="tasks__header">{currentTitle}</h2>
       {todos.map((taskProps) => (
         <React.Fragment key={taskProps.id}>
           <TaskElem task={taskProps} />

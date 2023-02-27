@@ -15,9 +15,10 @@ interface ProjectCreationAttrs {
   title: string;
   userId: number;
   description?: string;
+  tasks?: [];
 }
 
-@Table({ tableName: 'projects' })
+@Table({ tableName: 'projects', paranoid: true })
 export class Project extends Model<Project, ProjectCreationAttrs> {
   @ApiProperty({ example: '1', description: 'Project ID' })
   @Column({
@@ -45,5 +46,5 @@ export class Project extends Model<Project, ProjectCreationAttrs> {
   user: User;
 
   @HasMany(() => Task)
-  tasks: Task[]
+  tasks: Task[];
 }

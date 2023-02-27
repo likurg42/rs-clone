@@ -16,6 +16,8 @@ import { Todo } from '../types/todoType';
 interface UseTodos {
   todos: Todo[];
   amountOfTodosInbox: number;
+  currentTitle: string;
+  currentListViewId: number | null;
   fetchTodos: (payload: FetchTodoPayload) => void;
   removeTodo: (payload: RemoveTodoPayload) => void;
   updateTodo: (payload: UpdateTodoPayload) => void;
@@ -25,9 +27,7 @@ interface UseTodos {
 const useTodos = (): UseTodos => {
   const dispatch = useAppDispatch();
   const todos = useAppSelector(
-    (state: RootState) => state.todos.list.filter(
-      (todo) => todo.projectId === state.projects.currentProjectId,
-    ),
+    (state: RootState) => state.todos.currentList,
   );
 
   const amountOfTodosInbox = useAppSelector(
@@ -35,6 +35,31 @@ const useTodos = (): UseTodos => {
       (todo) => todo.projectId === null,
     ).length,
   );
+
+  const currentTitle = useAppSelector(
+    (state: RootState) => {
+      const { currentListView } = state.todos;
+      if (currentListView.property === 'contextId') {
+        const currentContext = state.contexts.list.find(
+          (context) => context.id === state.contexts.currentContextId,
+        );
+
+        if (currentContext) return currentContext.title;
+      }
+
+      if (currentListView.property === 'projectId') {
+        const currentProject = state.projects.list.find(
+          (project) => project.id === state.projects.currentProjectId,
+        );
+
+        if (currentProject) return currentProject.title;
+      }
+
+      return 'Inbox';
+    },
+  );
+
+  const currentListViewId = useAppSelector((state) => state.todos.currentListView.id);
 
   const actions = useMemo(() => bindActionCreators(
     {
@@ -46,6 +71,8 @@ const useTodos = (): UseTodos => {
   return {
     todos,
     amountOfTodosInbox,
+    currentTitle,
+    currentListViewId,
     ...actions,
   };
 };
