@@ -147,7 +147,9 @@ const todoSlice = createSlice({
       .addCase(updateTodo.fulfilled, (state, { payload: todo }) => {
         const { id } = todo;
         state.list = state.list.map((item) => (item.id === id ? todo : item));
-        state.currentList = state.currentList.map((item) => (item.id === id ? todo : item));
+        state.currentList = state.list.filter(
+          (todoItem) => todoItem[state.currentListView.property] === state.currentListView.id,
+        );
       })
       .addCase(removeTodo.fulfilled, (state, { payload }) => {
         state.list = state.list.filter((task) => task.id !== payload);

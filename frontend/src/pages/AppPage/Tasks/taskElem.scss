@@ -4,12 +4,15 @@
   transition: 0.3s all;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  
-  p {
+  gap: 0.5rem;
+
+  &__wrapper {
+    margin-right: auto;
+  }
+
+  &__title {
     font-size: 14px;
     padding: 0 0 0 10px;
-    margin-right: auto;
     color: var(--font-header-clr);
   }
 
