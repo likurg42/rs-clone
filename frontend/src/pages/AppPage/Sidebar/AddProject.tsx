@@ -1,13 +1,13 @@
 import {
   useCallback, useState, useRef, useEffect,
 } from 'react';
-import { useFormik } from 'formik';
-import AddSidebarElemForm from '../../../components/AddSidebarElemForm/AddSidebarElemForm';
+import { FormikHelpers, useFormik } from 'formik';
 import { CreateProjectDto } from '../../../types/projectType';
 import useProjects from '../../../hooks/useProjects';
 import useAuth from '../../../hooks/useAuth';
 import './AddProject.css';
 import iconAdd from '../../../images/icons/add.svg';
+import AddSidebarElemForm from '../../../components/AddSidebarElemForm/AddSidebarElemForm';
 
 const AddProject = () => {
   const [showForm, setShowForm] = useState(false);
@@ -23,12 +23,17 @@ const AddProject = () => {
     title: '',
   };
 
-  const onSubmit = useCallback((body: CreateProjectDto) => {
+  const onSubmit = useCallback((
+    body: CreateProjectDto,
+    formikHelpers: FormikHelpers<CreateProjectDto>,
+  ) => {
+    const { resetForm } = formikHelpers;
     createProject({
       createProjectDto: body,
       headers: getHeaders(),
     });
     setShowForm(false);
+    resetForm();
   }, [createProject, getHeaders]);
 
   const form = useFormik({

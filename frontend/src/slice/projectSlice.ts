@@ -32,7 +32,7 @@ export const fetchProjects = createAsyncThunk<
 );
 
 export type CreateProjectPayload = {
-  createProjectDto: CreateProjectDto,
+  createProjectDto: CreateProjectDto;
   headers: { Authorization?: string; },
 };
 

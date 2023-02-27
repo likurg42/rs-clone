@@ -79,7 +79,7 @@ const Sidebar = ({ projects, contexts }: SidebarProps) => {
             handleChange={handleContextChange(context)}
           />
         ))}
-        {/* <AddContext /> */}
+        <AddContext />
       </div>
     </div>
   );

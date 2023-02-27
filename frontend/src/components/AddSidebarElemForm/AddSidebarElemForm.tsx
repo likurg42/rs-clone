@@ -1,10 +1,11 @@
 import { FormikProps } from 'formik';
 import { ArrowUpCircleFill } from 'react-bootstrap-icons';
+import { CreateContextDto } from '../../types/contextType';
 import { CreateProjectDto } from '../../types/projectType';
 import './AddSidebarElemForm.css';
 
 type AddSidebarFormProps = {
-  readonly form: FormikProps<CreateProjectDto>;
+  readonly form: FormikProps<CreateProjectDto | CreateContextDto>;
 };
 
 const AddSidebarElemForm = ({ form }: AddSidebarFormProps) => {

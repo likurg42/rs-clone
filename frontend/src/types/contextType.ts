@@ -6,5 +6,6 @@ export type Context = {
   tasks: Todo[];
 };
 
-export type CreateContextDto = Omit<Todo, 'id'>;
+export type NewContext = Omit<Context, 'tasks'>;
+export type CreateContextDto = Omit<Context, 'id' | 'tasks'>;
 export type UpdateContextDto = Partial<CreateContextDto>;
