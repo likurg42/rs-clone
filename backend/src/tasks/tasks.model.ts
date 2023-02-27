@@ -1,19 +1,20 @@
 import { Table, Column, DataType, Model, BelongsTo, ForeignKey } from 'sequelize-typescript';
 import { User } from '../users/users.model.js';
 import { ApiProperty } from '@nestjs/swagger';
-import { Project } from "../projects/projects.model";
+import { Project } from "../projects/projects.model.js";
+import { Context } from '../context/context.model.js';
 
 interface TaskCreationAttrs {
   title: string;
   completed: boolean;
-  description?: string;
-  projectId: number;
   userId: number;
+  description?: string;
+  projectId?: number;
+  contextId?: number;
 }
 
 @Table({ tableName: 'tasks', paranoid: true })
 export class Task extends Model<Task, TaskCreationAttrs> {
-
   @ApiProperty({ example: '1', description: 'User ID' })
   @Column({
     type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true
@@ -34,17 +35,13 @@ export class Task extends Model<Task, TaskCreationAttrs> {
   @Column({ type: DataType.STRING })
   description: string;
 
-  @ApiProperty({ example: '1', description: 'Tasks\' project id' })
+  @ApiProperty({ example: '1', description: 'Project id' })
   @ForeignKey(() => Project)
   @Column({ type: DataType.INTEGER })
   projectId: number;
 
   @BelongsTo(() => Project)
   project: Project;
-
-  // @ApiProperty({ example: '[in-progress, home]', description: 'Task\s tags' })
-  // @Column({ type: DataType.ARRAY(DataType.STRING) })
-  // tags: string[];
 
   @ApiProperty({ example: '1', description: 'User ID' })
   @ForeignKey((() => User))
@@ -53,4 +50,12 @@ export class Task extends Model<Task, TaskCreationAttrs> {
 
   @BelongsTo(() => User)
   user: User;
+
+  @ApiProperty({ example: '1', description: 'Context id' })
+  @ForeignKey(() => Context)
+  @Column({ type: DataType.INTEGER })
+  contextId: number;
+
+  @BelongsTo(() => Context)
+  context: Context;
 }

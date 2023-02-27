@@ -7,7 +7,9 @@ import { ThemeProvider } from './context/themeContext';
 import store from './slice/store/store';
 
 const init = () => {
-  const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+  const root = ReactDOM.createRoot(
+    document.getElementById('root') as HTMLElement,
+  );
 
   root.render(
     <React.StrictMode>

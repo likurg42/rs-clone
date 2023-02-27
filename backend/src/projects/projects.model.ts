@@ -45,5 +45,5 @@ export class Project extends Model<Project, ProjectCreationAttrs> {
   user: User;
 
   @HasMany(() => Task)
-  tasks: Task[]
+  tasks: Task[];
 }

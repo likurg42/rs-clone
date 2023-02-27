@@ -21,15 +21,15 @@ type ValidatedRequest = Request & {
   user: {
     id: number,
     email: string,
-  }
-}
+  };
+};
 
 @ApiTags('Tasks')
 @Controller('api/tasks')
 export class TasksController {
   constructor(
     private taskService: TasksService,
-  ) {}
+  ) { }
 
   @ApiOperation({
     summary: 'Get User Tasks'
@@ -45,7 +45,6 @@ export class TasksController {
   @Get()
   @UseGuards(JwtAuthGuard)
   getUserTasks(@Req() req: ValidatedRequest) {
-    console.log(req.user);
     return this.taskService.findUserTasks(req.user.id);
   }
 

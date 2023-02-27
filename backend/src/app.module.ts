@@ -6,11 +6,13 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { AuthModule } from './auth/auth.module';
 import { TasksModule } from './tasks/tasks.module';
 import { Task } from "./tasks/tasks.model";
-import { ProjectsController } from './projects/projects.controller';
 import { ProjectsModule } from './projects/projects.module';
 import { Project } from "./projects/projects.model";
 import { ServeStaticModule } from "@nestjs/serve-static";
 import * as path from "path";
+import { ContextModule } from './context/context.module';
+import { Context } from './context/context.model';
+
 
 @Module({
   imports: [
@@ -31,17 +33,17 @@ import * as path from "path";
         User,
         Task,
         Project,
+        Context
       ],
       autoLoadModels: true,
-      synchronize: true,
+      sync: { force: true }
     }),
     UsersModule,
     AuthModule,
     TasksModule,
-    ProjectsModule
+    ProjectsModule,
+    ContextModule
   ],
-  controllers: [ProjectsController],
-  providers: [],
 })
 export class AppModule {
 }
