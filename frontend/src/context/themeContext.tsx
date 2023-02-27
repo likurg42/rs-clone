@@ -21,8 +21,8 @@ const ThemeContext = React.createContext<ThemeContextType | null>(null);
 type PropsWithChildren = { readonly children: ReactNode };
 
 export const ThemeProvider = ({ children }: PropsWithChildren) => {
-  const [theme, setTheme] = useState<string | null>(null);
-
+  const [theme, setTheme] = useState<string | null>(JSON.parse(localStorage.getItem('theme') || ''));
+  localStorage.setItem('theme', JSON.stringify(theme));
   const changeTheme = useCallback((arg: string | null) => {
     setTheme(arg);
   }, []);
