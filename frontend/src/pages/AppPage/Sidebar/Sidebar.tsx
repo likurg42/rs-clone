@@ -17,7 +17,7 @@ type SidebarProps = {
 
 const Sidebar = ({ projects, contexts }: SidebarProps) => {
   const { changeCurrentProject, removeProject } = useProjects();
-  const { changeCurrentContext } = useContexts();
+  const { changeCurrentContext, removeContext } = useContexts();
   const { amountOfTodosInbox } = useTodos();
   const { getHeaders } = useAuth();
 
@@ -37,6 +37,13 @@ const Sidebar = ({ projects, contexts }: SidebarProps) => {
     removeProject({
       headers: getHeaders(),
       id: project.id,
+    });
+  };
+
+  const handleContextRemove = (context: Context) => () => {
+    removeContext({
+      headers: getHeaders(),
+      id: context.id,
     });
   };
 
@@ -77,6 +84,7 @@ const Sidebar = ({ projects, contexts }: SidebarProps) => {
             title={context.title}
             amount={context.tasks.length}
             handleChange={handleContextChange(context)}
+            handleRemove={handleContextRemove(context)}
           />
         ))}
         <AddContext />
