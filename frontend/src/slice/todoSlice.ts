@@ -6,7 +6,7 @@ import axios from 'axios';
 import routes from '../routes/routes';
 import { CreateTodoDto, Todo, UpdateTodoDto } from '../types/todoType';
 import { changeCurrentContext } from './contextSlice';
-import { changeCurrentProject } from './projectSlice';
+import { changeCurrentProject, createProject, removeProject } from './projectSlice';
 import { createSerializedError, isError, SerializedError } from './sliceUtils';
 
 type CurrentListView = {
@@ -76,7 +76,7 @@ export const updateTodo = createAsyncThunk<
   UpdateTodoPayload,
   { readonly rejectValue: SerializedError; }
 >(
-  'tasks/toggle',
+  'tasks/update',
   async ({ id, updateTodoDto, headers }, { rejectWithValue }) => {
     try {
       const response = await axios.patch(routes.api.task(String(id)), updateTodoDto, { headers });
@@ -152,6 +152,16 @@ const todoSlice = createSlice({
       .addCase(removeTodo.fulfilled, (state, { payload }) => {
         state.list = state.list.filter((task) => task.id !== payload);
         state.currentList = state.currentList.filter((task) => task.id !== payload);
+      })
+      .addCase(createProject.fulfilled, (state, { payload }) => {
+        state.currentList = [];
+        state.currentListView = {
+          id: payload.id,
+          property: 'projectId',
+        };
+      })
+      .addCase(removeProject.fulfilled, (state) => {
+        state.currentList = state.list.filter((todo) => todo.projectId === null);
       })
       .addCase(changeCurrentContext, (state, { payload: currentContextId }) => {
         state.currentList = state.list.filter((task) => task.contextId === currentContextId);

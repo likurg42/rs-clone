@@ -102,6 +102,7 @@ export class TasksController {
     @Param('id') taskId: string,
     @Req() req: ValidatedRequest,
   ) {
+    console.log(req.user.id);
     return this.taskService.deleteTask(+taskId, req.user.id);
   }
 }

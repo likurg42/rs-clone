@@ -97,7 +97,6 @@ export class ContextController {
     @Param('id') contextId: string,
     @Req() req: ValidatedRequest,
   ) {
-    console.log(req);
     return this.contextService.delete(+contextId, req.user.id);
   }
 }

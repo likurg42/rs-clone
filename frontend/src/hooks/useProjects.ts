@@ -3,12 +3,24 @@ import { useMemo } from 'react';
 import { Project } from '../types/projectType';
 import { RootState, useAppDispatch, useAppSelector } from '../slice/store';
 import {
-  changeCurrentProject, ChangeCurrentProjectPayload, fetchProjects, FetchProjectsPayload,
+  changeCurrentProject,
+  ChangeCurrentProjectPayload,
+  fetchProjects,
+  FetchProjectsPayload,
+  createProject,
+  updateProject,
+  removeProject,
+  CreateProjectPayload,
+  UpdateProjectPayload,
+  RemoveProjectPayload,
 } from '../slice/projectSlice';
 
 interface UseProjects {
   changeCurrentProject: (payload: ChangeCurrentProjectPayload) => void;
   fetchProjects: (payload: FetchProjectsPayload) => void;
+  createProject: (payload: CreateProjectPayload) => void;
+  updateProject: (payload: UpdateProjectPayload) => void;
+  removeProject: (pyaload: RemoveProjectPayload) => void;
   projects: Project[];
   currentProject: Project | undefined;
   currentProjectId: number | null;
@@ -25,7 +37,13 @@ const useProjects = (): UseProjects => {
   ));
 
   const actions = useMemo(() => bindActionCreators(
-    { changeCurrentProject, fetchProjects },
+    {
+      changeCurrentProject,
+      fetchProjects,
+      createProject,
+      updateProject,
+      removeProject,
+    },
     dispatch,
   ), [dispatch]);
 

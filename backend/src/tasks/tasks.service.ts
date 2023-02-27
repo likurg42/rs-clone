@@ -30,7 +30,9 @@ export class TasksService {
   }
 
   async deleteTask(taskId: number, userId: number) {
+    console.log({ userId });
     const belongs = await this.isTaskBelongsToUser(taskId, userId);
+
     if (!belongs) {
       throw new UnauthorizedException('User is unauthorized');
     }

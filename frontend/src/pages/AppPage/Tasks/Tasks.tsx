@@ -21,7 +21,6 @@ const Tasks = () => {
   const onSubmit = async (body: TaskFormValues, formikHelpers: FormikHelpers<TaskFormValues>) => {
     const { resetForm } = formikHelpers;
     const { title, projectId, contextId } = body;
-    console.log({ body });
     addNewTodo({
       createTodoDto: {
         title,

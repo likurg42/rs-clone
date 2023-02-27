@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { FormikProps } from 'formik';
 import useProjects from '../../../hooks/useProjects';
 import iconAdd from './add.svg';
@@ -25,13 +25,27 @@ const AddTaskForm = ({ form }: FormProps) => {
   } = form;
   const { projects, currentProjectId } = useProjects();
   const { contexts, currentContextId } = useContexts();
+  const ref = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     setShow(false);
   }, [currentProjectId, currentContextId]);
 
+  useEffect(() => {
+    const handleClickOutside = (event: Event) => {
+      if (event.target && ref.current && !ref.current.contains((event.target as Node))) {
+        setShow(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [ref]);
+
   return (show ? (
-    <form className="add__form" onSubmit={handleSubmit}>
+    <form className="add__form" onSubmit={handleSubmit} ref={ref}>
       <input
         name="title"
         className="input__form"
@@ -40,14 +54,7 @@ const AddTaskForm = ({ form }: FormProps) => {
         value={values.title}
         onChange={handleChange}
         onBlur={handleBlur}
-      />
-      <textarea
-        name="description"
-        className="input__form"
-        placeholder="Description"
-        value={values.description}
-        onChange={handleChange}
-        onBlur={handleBlur}
+        autoFocus
       />
       <div className="line__form" />
       <div className="footer__form">
@@ -95,7 +102,7 @@ const AddTaskForm = ({ form }: FormProps) => {
   ) : (
     <button type="button" className="add__task" onClick={() => setShow(true)}>
       <img src={iconAdd} alt="" />
-      <p className="add__text">Add</p>
+      <span className="add__text">Add</span>
     </button>
   ));
 };

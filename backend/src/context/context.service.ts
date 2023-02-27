@@ -29,7 +29,6 @@ export class ContextService {
   }
 
   async delete(contextId: number, userId: number) {
-    console.log({ userId });
     const belongs = await this.isContextBelongsToUser(contextId, userId);
     if (!belongs) {
       throw new UnauthorizedException('User is unauthorized');

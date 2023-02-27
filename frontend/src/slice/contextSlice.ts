@@ -4,6 +4,7 @@ import {
 import axios from 'axios';
 import routes from '../routes/routes';
 import { Context } from '../types/contextType';
+// eslint-disable-next-line import/no-cycle
 import { changeCurrentProject } from './projectSlice';
 import { createSerializedError, isError, SerializedError } from './sliceUtils';
 
