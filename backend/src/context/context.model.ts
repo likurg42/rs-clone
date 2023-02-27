@@ -8,7 +8,7 @@ interface TagCreationAttrs {
   taskId: number;
 }
 
-@Table({ tableName: 'tags', paranoid: true, })
+@Table({ tableName: 'context', paranoid: true, })
 export class Context extends Model<Context, TagCreationAttrs> {
   @ApiProperty({ example: '1', description: 'Tag ID' })
   @Column({
