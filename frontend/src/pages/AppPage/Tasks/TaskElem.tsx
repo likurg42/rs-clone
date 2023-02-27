@@ -6,8 +6,6 @@ import useTodos from '../../../hooks/useTodos';
 import useAuth from '../../../hooks/useAuth';
 import TaskForm from './TaskForm';
 import { CreateTodoForm } from '../../../types/taskFormType';
-import useProjects from '../../../hooks/useProjects';
-import useContexts from '../../../hooks/useContexts';
 import getTaskSchema from '../../../schemas/taskSchema';
 import { Todo } from '../../../types/todoType';
 
@@ -17,10 +15,8 @@ type TaskElemProps = {
 
 const TaskElem = ({ task }: TaskElemProps) => {
   const [show, setShow] = useState(false);
-  const { updateTodo, removeTodo, currentListViewId } = useTodos();
+  const { updateTodo, removeTodo } = useTodos();
   const { getHeaders } = useAuth();
-  const { currentProjectId } = useProjects();
-  const { currentContextId } = useContexts();
   const ref = useRef<HTMLDivElement>(null);
 
   const handleComplete = () => {
