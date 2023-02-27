@@ -1,10 +1,7 @@
 import './taskElem.scss';
-import { useEffect } from 'react';
-// import { Checkmark12Filled, Delete16Regular } from '@fluentui/react-icons';
 import { Check2, Trash3 } from 'react-bootstrap-icons';
-import { removeTodo, updateTodo } from '../../../slice/todoSlice';
+import useTodos from '../../../hooks/useTodos';
 import useAuth from '../../../hooks/useAuth';
-import { useAppDispatch } from '../../../hooks/todoHook';
 
 type Task = {
   readonly title: string;
@@ -17,29 +14,25 @@ type TaskElemProps = {
 };
 
 const TaskElem = ({ task }: TaskElemProps) => {
-  const dispatch = useAppDispatch();
+  const { updateTodo, removeTodo } = useTodos();
   const { getHeaders } = useAuth();
 
   const handleComplete = () => {
-    dispatch(updateTodo({
+    updateTodo({
       id: task.id,
       todoDto: {
         completed: !task.completed,
       },
       headers: getHeaders(),
-    }));
+    });
   };
 
   const handleDelete = () => {
-    dispatch(removeTodo({
+    removeTodo({
       id: task.id,
       headers: getHeaders(),
-    }));
+    });
   };
-
-  useEffect(() => {
-    console.log(task);
-  });
 
   return (
     <div className="taskElem">

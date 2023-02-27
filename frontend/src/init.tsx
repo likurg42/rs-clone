@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import App from './App';
 import { AuthProvider } from './context/authContext';
 import { ThemeProvider } from './context/themeContext';
-import store from './slice/store/store';
+import store from './slice/store';
 
 const init = () => {
   const root = ReactDOM.createRoot(

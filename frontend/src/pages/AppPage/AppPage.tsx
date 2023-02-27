@@ -1,25 +1,21 @@
 import './appPage.scss';
 import { useEffect } from 'react';
 import cn from 'classnames';
+import useProjects from '../../hooks/useProjects';
 import useTheme from '../../hooks/useTheme';
 import HeaderApp from './HeaderApp/HeaderApp';
 import Sidebar from './Sidebar/Sidebar';
 import Tasks from './Tasks/Tasks';
-import { useAppDispatch, useAppSelector } from '../../hooks/todoHook';
-import { fetchProjects } from '../../slice/projectSlice';
 import useAuth from '../../hooks/useAuth';
-import { RootState } from '../../slice/store/store';
 
-const TasksPage = () => {
-  const dispatch = useAppDispatch();
+const AppPage = () => {
+  const { theme } = useTheme();
   const { getHeaders } = useAuth();
-  const projects = useAppSelector((state: RootState) => state.projects.list);
+  const { fetchProjects, projects } = useProjects();
 
   useEffect(() => {
-    dispatch(fetchProjects({ headers: getHeaders() }));
-  }, [dispatch, getHeaders]);
-
-  const { theme } = useTheme();
+    fetchProjects({ headers: getHeaders() });
+  }, [fetchProjects, getHeaders]);
 
   const themeClass = cn('full-page', {
     [`theme-${theme}`]: theme,
@@ -37,4 +33,4 @@ const TasksPage = () => {
     </div>
   );
 };
-export default TasksPage;
+export default AppPage;

@@ -7,12 +7,14 @@ import routes from '../routes/routes';
 import { Project } from '../types/projectType';
 import { createSerializedError, isError, SerializedError } from './todoSlice';
 
+export type FetchProjectsPayload = {
+  headers: { Authorization?: string; };
+};
+
 export const fetchProjects = createAsyncThunk<
   Project[],
-  {
-    headers: { Authorization?: string }
-  },
-  { readonly rejectValue: SerializedError | Error }
+  FetchProjectsPayload,
+  { readonly rejectValue: SerializedError | Error; }
 >(
   'projects/fetch',
   async ({ headers }, { rejectWithValue }) => {
@@ -25,27 +27,28 @@ export const fetchProjects = createAsyncThunk<
   },
 );
 
+export type ChangeCurrentProjectPayload = number | null;
+
 type ProjectState = {
   readonly list: Project[];
   readonly loading: boolean;
   readonly error: string | null;
-  readonly currentProject: number | null;
+  readonly currentProjectId: ChangeCurrentProjectPayload;
 };
 
 const initialState: ProjectState = {
   list: [],
   loading: false,
   error: null,
-  currentProject: null,
+  currentProjectId: null,
 };
 
 const projectSlice = createSlice({
   name: 'project',
   initialState,
   reducers: {
-    changeCurrentProject: (state, action: PayloadAction<number | null>) => {
-      console.log(action.payload);
-      state.currentProject = action.payload;
+    changeCurrentProject: (state, action: PayloadAction<ChangeCurrentProjectPayload>) => {
+      state.currentProjectId = action.payload;
     },
   },
   extraReducers: (builder) => {
