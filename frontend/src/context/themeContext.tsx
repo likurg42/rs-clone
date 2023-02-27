@@ -3,13 +3,13 @@ import React, {
 } from 'react';
 
 export type ThemeContextType = {
-  themes: Themes
-  theme: string | null
-  changeTheme: (theme: string | null) => void
+  themes: Themes;
+  theme: string | null;
+  changeTheme: (theme: string | null) => void;
 };
 
 type Themes = {
-  DARK: string
+  DARK: string;
 };
 
 export const themes: Themes = {
@@ -18,10 +18,20 @@ export const themes: Themes = {
 
 const ThemeContext = React.createContext<ThemeContextType | null>(null);
 
-type PropsWithChildren = { readonly children: ReactNode };
+type PropsWithChildren = { readonly children: ReactNode; };
+
+const getThemeFromLS = (): string | null => {
+  const theme = localStorage.getItem('theme');
+  if (theme) {
+    return JSON.parse(theme);
+  }
+
+  return null;
+};
 
 export const ThemeProvider = ({ children }: PropsWithChildren) => {
-  const [theme, setTheme] = useState<string | null>(JSON.parse(localStorage.getItem('theme') || ''));
+  const [theme, setTheme] = useState<string | null>(getThemeFromLS());
+
   const changeTheme = useCallback((arg: string | null) => {
     localStorage.setItem('theme', JSON.stringify(arg));
     setTheme(arg);
