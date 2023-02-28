@@ -2,6 +2,8 @@ import './sidebar.scss';
 import useTodos from '../../../hooks/useTodos';
 import SidebarElem from './SidebarElem';
 import iconOne from './1.svg';
+import projectIcon from './6.svg';
+import contextIcon from './4.svg';
 import { Project } from '../../../types/projectType';
 import useProjects from '../../../hooks/useProjects';
 import { Context } from '../../../types/contextType';
@@ -64,7 +66,7 @@ const Sidebar = ({ projects, contexts }: SidebarProps) => {
         </div>
         {projects && projects.map((project) => (
           <SidebarElem
-            icon={null}
+            icon={projectIcon}
             key={project.id}
             title={project.title}
             amount={project.tasks.length}
@@ -78,7 +80,7 @@ const Sidebar = ({ projects, contexts }: SidebarProps) => {
         </div>
         {contexts && contexts.map((context) => (
           <SidebarElem
-            icon={null}
+            icon={contextIcon}
             key={context.id}
             title={context.title}
             amount={context.tasks.length}
