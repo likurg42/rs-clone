@@ -12,6 +12,7 @@ import { createSerializedError, isError, SerializedError } from './sliceUtils';
 type CurrentListView = {
   property: keyof Todo;
   id: number | null;
+  title: string;
 };
 
 type TodoState = {
@@ -115,6 +116,7 @@ const initialState: TodoState = {
   currentListView: {
     property: 'projectId',
     id: null,
+    title: 'Inbox',
   },
   loading: false,
   error: null,
@@ -155,40 +157,59 @@ const todoSlice = createSlice({
         state.list = state.list.filter((task) => task.id !== payload);
         state.currentList = state.currentList.filter((task) => task.id !== payload);
       })
-      .addCase(createProject.fulfilled, (state, { payload }) => {
+      .addCase(createProject.fulfilled, (state, { payload: project }) => {
+        const { id, title } = project;
         state.currentList = [];
         state.currentListView = {
-          id: payload.id,
+          id,
           property: 'projectId',
+          title,
         };
       })
       .addCase(removeProject.fulfilled, (state) => {
         state.currentList = state.list.filter((todo) => todo.projectId === null);
+        state.currentListView = initialState.currentListView;
       })
       .addCase(createContext.fulfilled, (state, { payload }) => {
         state.currentList = [];
         state.currentListView = {
           id: payload.id,
           property: 'contextId',
+          title: payload.title,
         };
       })
       .addCase(removeContext.fulfilled, (state) => {
         state.currentList = state.list.filter((todo) => todo.projectId === null);
+        state.currentListView = initialState.currentListView;
       })
-      .addCase(changeCurrentContext, (state, { payload: currentContextId }) => {
-        state.currentList = state.list.filter((task) => task.contextId === currentContextId);
-        state.currentListView = {
-          property: 'contextId',
-          id: currentContextId,
-        };
+      /* Change current View */
+      .addCase(changeCurrentContext, (state, { payload: context }) => {
+        if (context) {
+          const { id, title } = context;
+          console.log(id);
+          state.currentList = state.list.filter((task) => task.contextId === id);
+          state.currentListView = {
+            property: 'contextId',
+            id,
+            title,
+          };
+        }
       })
-      .addCase(changeCurrentProject, (state, { payload: currentProjectId }) => {
-        state.currentList = state.list.filter((task) => task.projectId === currentProjectId);
-        state.currentListView = {
-          property: 'projectId',
-          id: currentProjectId,
-        };
+      .addCase(changeCurrentProject, (state, { payload: currentProject }) => {
+        if (currentProject) {
+          const { id, title } = currentProject;
+          state.currentList = state.list.filter((task) => task.projectId === id);
+          state.currentListView = {
+            property: 'projectId',
+            id,
+            title,
+          };
+        } else {
+          state.currentListView = initialState.currentListView;
+          state.currentList = state.list.filter((todoItem) => todoItem.projectId === null);
+        }
       })
+      /***/
       .addMatcher(isError, (state, action: PayloadAction<string>) => {
         state.loading = false;
         state.error = action.payload;

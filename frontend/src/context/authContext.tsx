@@ -15,10 +15,10 @@ type EmptyUser = {
 };
 
 export type AuthContextType = {
-  readonly user: User;
+  readonly user: User | EmptyUser;
   readonly getHeaders: () => {
     readonly Authorization?: string;
-  }
+  };
   readonly login: (data: User) => void;
   readonly logout: () => void;
 };
@@ -28,6 +28,7 @@ const generateEmptyUser = (): EmptyUser => ({
   token: null,
   email: null,
 });
+
 const getUserFromLocalStorage = () => {
   const user = localStorage.getItem('user');
   return user ? JSON.parse(user) : generateEmptyUser();
@@ -37,9 +38,9 @@ const setUserInLocalStorage = (user: User | EmptyUser) => localStorage.setItem('
 
 const AuthContext = React.createContext<AuthContextType | null>(null);
 
-type PropsWithChildren = { readonly children: ReactNode };
+type PropsWithChildren = { readonly children: ReactNode; };
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const [user, setUser] = useState(getUserFromLocalStorage());
+  const [user, setUser] = useState<User | EmptyUser>(getUserFromLocalStorage());
 
   const getHeaders = useCallback(() => {
     const { token } = user;

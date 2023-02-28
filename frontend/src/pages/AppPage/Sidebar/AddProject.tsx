@@ -57,7 +57,7 @@ const AddProject = () => {
   return (
     <div className="add-project-button-wrapper">
       {showForm ? (
-        <div ref={ref}>
+        <div style={{ width: '100%' }} ref={ref}>
           <AddSidebarElemForm form={form} />
         </div>
       ) : (
