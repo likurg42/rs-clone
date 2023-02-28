@@ -36,7 +36,7 @@ import { Context } from './context/context.model';
         Context
       ],
       // autoLoadModels: true,
-      synchronize: true,
+      // synchronize: true,
       sync: { force: true }
     }),
     UsersModule,

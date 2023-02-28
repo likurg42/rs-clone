@@ -9,6 +9,7 @@
     }
 
     .add__text {
+        color: var(--font-header-clr);
         font-size: 14px;
     }
 }
@@ -32,6 +33,7 @@
     white-space: pre-wrap;
     width: 100%;
     resize: none;
+    color: var(--font-header-clr);
 }
 
 .input__form:focus-visible {

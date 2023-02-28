@@ -17,6 +17,8 @@
   }
 
   .add__text {
+    color: var(--font-header-clr);
+
       font-size: 14px;
   }
 }
