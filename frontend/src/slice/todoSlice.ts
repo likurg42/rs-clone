@@ -184,14 +184,16 @@ const todoSlice = createSlice({
       })
       /* Change current View */
       .addCase(changeCurrentContext, (state, { payload: context }) => {
-        const { id, title } = context;
-        console.log(id);
-        state.currentList = state.list.filter((task) => task.contextId === id);
-        state.currentListView = {
-          property: 'contextId',
-          id,
-          title,
-        };
+        if (context) {
+          const { id, title } = context;
+          console.log(id);
+          state.currentList = state.list.filter((task) => task.contextId === id);
+          state.currentListView = {
+            property: 'contextId',
+            id,
+            title,
+          };
+        }
       })
       .addCase(changeCurrentProject, (state, { payload: currentProject }) => {
         if (currentProject) {

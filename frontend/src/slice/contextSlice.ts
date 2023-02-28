@@ -121,7 +121,7 @@ const contextSlice = createSlice({
   name: 'context',
   initialState,
   reducers: {
-    changeCurrentContext: (state, action: PayloadAction<Context>) => {
+    changeCurrentContext: (state, action: PayloadAction<CurrentContext>) => {
       state.currentContext = action.payload;
     },
   },
