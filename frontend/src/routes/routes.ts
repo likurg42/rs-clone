@@ -5,7 +5,7 @@ const routes = {
     main: () => ['/'].join('/'),
     login: () => ['/login'].join('/'),
     signup: () => ['/signup'].join('/'),
-    app: () => ['/app'].join('/'),
+    app: () => '/app',
   },
   api: {
     login: () => [API_PREFIX, 'auth', 'login'].join('/'),
