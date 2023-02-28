@@ -20,7 +20,7 @@ type SidebarProps = {
 const Sidebar = ({ projects, contexts }: SidebarProps) => {
   const { changeCurrentProject, removeProject } = useProjects();
   const { changeCurrentContext, removeContext } = useContexts();
-  const { amountOfTodosInbox, todos } = useTodos();
+  const { amountOfTodosInbox, allTodos } = useTodos();
   const { getHeaders } = useAuth();
 
   const handleProjectChange = (project?: Project) => () => {
@@ -69,7 +69,10 @@ const Sidebar = ({ projects, contexts }: SidebarProps) => {
             icon={projectIcon}
             key={project.id}
             title={project.title}
-            amount={todos.filter((todoItem) => todoItem.projectId === project.id).length}
+            amount={allTodos && allTodos.filter((todoItem) => {
+              console.log(todoItem);
+              return todoItem.projectId === project.id;
+            }).length}
             handleChange={handleProjectChange(project)}
             handleRemove={handleProjectRemove(project)}
           />
@@ -83,7 +86,10 @@ const Sidebar = ({ projects, contexts }: SidebarProps) => {
             icon={contextIcon}
             key={context.id}
             title={context.title}
-            amount={todos.filter((todoItem) => todoItem.contextId === context.id).length}
+            amount={
+              allTodos
+              && allTodos.filter((todoItem) => todoItem.contextId === context.id).length
+            }
             handleChange={handleContextChange(context)}
             handleRemove={handleContextRemove(context)}
           />
