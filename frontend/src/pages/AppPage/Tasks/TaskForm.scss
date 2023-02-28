@@ -52,7 +52,10 @@
 
 .footer__form {
     display: flex;
-    justify-content: space-between;
+
+    &>*:last-child {
+        margin-left: auto;
+    }
 }
 
 .select__form {
