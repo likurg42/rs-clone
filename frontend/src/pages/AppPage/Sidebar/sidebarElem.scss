@@ -16,6 +16,7 @@
   visibility: hidden;
   padding: 7px 10px;
   cursor: pointer;
+  stroke: var(--trash-icon-bg-clr);
 
 
   & svg {
@@ -24,7 +25,7 @@
   }
 
   &:hover {
-    background-color: #eee;
+    background-color: var(--sidebar-elem-hover);
     border-radius: 5px;
   }
 }
@@ -44,7 +45,7 @@
   flex-grow: 1;
 
   &:hover {
-    background-color: #eee;
+    background-color: var(--sidebar-elem-hover);
     border-radius: 5px;
   }
 

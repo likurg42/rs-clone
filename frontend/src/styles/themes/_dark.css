@@ -8,5 +8,6 @@
   --task-border-clr: var(--gray-300);
   --checkbox-icon-bg-clr: var(--gray-200);
   --trash-icon-bg-clr: var(--gray-200);
-  --font-header-clr: var(--gray-50)
+  --font-header-clr: var(--gray-50);
+  --sidebar-elem-hover: var(--gray-300);
 }

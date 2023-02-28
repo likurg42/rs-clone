@@ -1,16 +1,14 @@
 .add-project-button-wrapper {
   display: flex;
-  justify-content: center;
+  margin-left: 1rem;
 }
 .add-project-button {
-  all: unset;
   all: unset;
   display: flex;
   flex-grow: 1;
   height: 2rem;
   cursor: pointer;
   align-items: center;
-  justify-content: center;
 
   img {
       padding: 0 10px 0 0;
