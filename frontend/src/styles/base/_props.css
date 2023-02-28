@@ -8,6 +8,7 @@
   --gray-100: rgb(250,250,250);
   --gray-200: rgb(238,238,238);
   --gray-300: rgb(128,128,128);
+  --dark-gray-600: hsla(0,0%,100%,0.1);
   --dark-gray-700:rgb(40,40,40);
   --dark-gray-800:rgb(36,36,36);
   --dark-gray-900:rgb(32,32,32);
@@ -21,6 +22,7 @@
   --trash-icon-bg-clr: var(--black-900);
   --font-header-clr: var(--black-900);
   --sidebar-elem-hover: var(--gray-200);
+  --task-divider: var(--gray-100);
 
 
 

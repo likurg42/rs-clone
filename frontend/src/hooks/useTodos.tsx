@@ -18,6 +18,7 @@ interface UseTodos {
   amountOfTodosInbox: number;
   currentTitle: string;
   currentListViewId: number | null;
+  allTodos: Todo[];
   fetchTodos: (payload: FetchTodoPayload) => void;
   removeTodo: (payload: RemoveTodoPayload) => void;
   updateTodo: (payload: UpdateTodoPayload) => void;
@@ -28,6 +29,10 @@ const useTodos = (): UseTodos => {
   const dispatch = useAppDispatch();
   const todos = useAppSelector(
     (state: RootState) => state.todos.currentList,
+  );
+
+  const allTodos = useAppSelector(
+    (state: RootState) => state.todos.list,
   );
 
   const amountOfTodosInbox = useAppSelector(
@@ -53,6 +58,7 @@ const useTodos = (): UseTodos => {
   ), [dispatch]);
 
   return {
+    allTodos,
     todos,
     amountOfTodosInbox,
     currentTitle,
