@@ -16,7 +16,7 @@ type CurrentListView = {
 };
 
 type TodoState = {
-  readonly list: readonly Todo[];
+  readonly list: Todo[];
   readonly currentList: Todo[];
   readonly currentListView: CurrentListView;
   readonly loading: boolean;
