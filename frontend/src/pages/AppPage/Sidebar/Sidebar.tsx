@@ -23,14 +23,14 @@ const Sidebar = ({ projects, contexts }: SidebarProps) => {
 
   const handleProjectChange = (project?: Project) => () => {
     if (project) {
-      changeCurrentProject(project.id);
+      changeCurrentProject(project);
     } else {
       changeCurrentProject(null);
     }
   };
 
   const handleContextChange = (context: Context) => () => {
-    changeCurrentContext(context.id);
+    changeCurrentContext(context);
   };
 
   const handleProjectRemove = (project: Project) => () => {
@@ -70,7 +70,6 @@ const Sidebar = ({ projects, contexts }: SidebarProps) => {
             amount={project.tasks.length}
             handleChange={handleProjectChange(project)}
             handleRemove={handleProjectRemove(project)}
-
           />
         ))}
         <AddProject />

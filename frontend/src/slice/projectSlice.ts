@@ -102,28 +102,26 @@ export const removeProject = createAsyncThunk<
   },
 );
 
-export type ChangeCurrentProjectPayload = number | null;
-
 type ProjectState = {
   readonly list: Project[];
   readonly loading: boolean;
   readonly error: string | null;
-  readonly currentProjectId: ChangeCurrentProjectPayload;
+  readonly currentProject: Project | null;
 };
 
 const initialState: ProjectState = {
   list: [],
   loading: false,
   error: null,
-  currentProjectId: null,
+  currentProject: null,
 };
 
 const projectSlice = createSlice({
   name: 'project',
   initialState,
   reducers: {
-    changeCurrentProject: (state, action: PayloadAction<ChangeCurrentProjectPayload>) => {
-      state.currentProjectId = action.payload;
+    changeCurrentProject: (state, action: PayloadAction<Project | null>) => {
+      state.currentProject = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -142,7 +140,7 @@ const projectSlice = createSlice({
       .addCase(createProject.fulfilled, (state, { payload: newProject }) => {
         const project: Project = { ...newProject, tasks: [] };
         state.list.push(project);
-        state.currentProjectId = project.id;
+        state.currentProject = project;
       })
       .addCase(updateProject.fulfilled, (state, { payload: todo }) => {
         const { id } = todo;
@@ -150,10 +148,10 @@ const projectSlice = createSlice({
       })
       .addCase(removeProject.fulfilled, (state, { payload }) => {
         state.list = state.list.filter((task) => task.id !== payload);
-        state.currentProjectId = null;
+        state.currentProject = null;
       })
       .addCase(changeCurrentContext, (state) => {
-        state.currentProjectId = null;
+        state.currentProject = null;
       })
       .addMatcher(isError, (state, action: PayloadAction<string>) => {
         state.loading = false;

@@ -3,7 +3,6 @@ import { bindActionCreators } from '@reduxjs/toolkit';
 import { RootState, useAppDispatch, useAppSelector } from '../slice/store';
 import { Context } from '../types/contextType';
 import {
-  CurrentContextId,
   FetchContextPayload,
   fetchContexts,
   changeCurrentContext,
@@ -17,9 +16,9 @@ import {
 
 type UseContext = {
   contexts: Context[];
-  currentContextId: CurrentContextId;
+  currentContextId: number | null;
   fetchContexts: (payload: FetchContextPayload) => void;
-  changeCurrentContext: (payload: CurrentContextId) => void;
+  changeCurrentContext: (payload: Context | null) => void;
   createContext: (payload: CreateContextPayload) => void;
   updateContext: (payload: UpdateContextPayload) => void;
   removeContext: (payload: RemoveContextPayload) => void;
@@ -28,7 +27,12 @@ type UseContext = {
 const useContexts = (): UseContext => {
   const dispatch = useAppDispatch();
 
-  const currentContextId = useAppSelector((state: RootState) => state.contexts.currentContextId);
+  const currentContextId = useAppSelector((state: RootState) => {
+    if (state.contexts.currentContext) {
+      return state.contexts.currentContext.id;
+    }
+    return null;
+  });
 
   const actions = useMemo(() => bindActionCreators({
     fetchContexts,

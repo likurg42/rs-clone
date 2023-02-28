@@ -8,17 +8,20 @@ import Sidebar from './Sidebar/Sidebar';
 import Tasks from './Tasks/Tasks';
 import useAuth from '../../hooks/useAuth';
 import useContexts from '../../hooks/useContexts';
+import useTodos from '../../hooks/useTodos';
 
 const AppPage = () => {
   const { theme } = useTheme();
   const { getHeaders } = useAuth();
+  const { fetchTodos } = useTodos();
   const { fetchProjects, projects } = useProjects();
   const { fetchContexts, contexts } = useContexts();
 
   useEffect(() => {
     fetchProjects({ headers: getHeaders() });
     fetchContexts({ headers: getHeaders() });
-  }, [fetchProjects, fetchContexts, getHeaders]);
+    fetchTodos({ headers: getHeaders() });
+  }, [fetchProjects, fetchContexts, getHeaders, fetchTodos]);
 
   const themeClass = cn('full-page', {
     [`theme-${theme}`]: theme,

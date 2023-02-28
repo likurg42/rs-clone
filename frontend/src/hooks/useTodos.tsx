@@ -39,23 +39,7 @@ const useTodos = (): UseTodos => {
   const currentTitle = useAppSelector(
     (state: RootState) => {
       const { currentListView } = state.todos;
-      if (currentListView.property === 'contextId') {
-        const currentContext = state.contexts.list.find(
-          (context) => context.id === state.contexts.currentContextId,
-        );
-
-        if (currentContext) return currentContext.title;
-      }
-
-      if (currentListView.property === 'projectId') {
-        const currentProject = state.projects.list.find(
-          (project) => project.id === state.projects.currentProjectId,
-        );
-
-        if (currentProject) return currentProject.title;
-      }
-
-      return 'Inbox';
+      return currentListView.title ?? 'Inbox';
     },
   );
 

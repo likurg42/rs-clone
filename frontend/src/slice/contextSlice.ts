@@ -101,28 +101,28 @@ export const removeContext = createAsyncThunk<
   },
 );
 
-export type CurrentContextId = number | null;
+export type CurrentContext = Context | null;
 
 type ContextState = {
   readonly list: Context[];
   readonly loading: boolean;
   readonly error: string | null;
-  readonly currentContextId: CurrentContextId;
+  readonly currentContext: CurrentContext;
 };
 
 const initialState: ContextState = {
   list: [],
   loading: false,
   error: null,
-  currentContextId: null,
+  currentContext: null,
 };
 
 const contextSlice = createSlice({
   name: 'context',
   initialState,
   reducers: {
-    changeCurrentContext: (state, action: PayloadAction<CurrentContextId>) => {
-      state.currentContextId = action.payload;
+    changeCurrentContext: (state, action: PayloadAction<Context>) => {
+      state.currentContext = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -141,7 +141,7 @@ const contextSlice = createSlice({
       .addCase(createContext.fulfilled, (state, { payload: newContext }) => {
         const context: Context = { ...newContext, tasks: [] };
         state.list.push(context);
-        state.currentContextId = context.id;
+        state.currentContext = context;
       })
       .addCase(updateContext.fulfilled, (state, { payload: context }) => {
         const { id } = context;
@@ -149,10 +149,10 @@ const contextSlice = createSlice({
       })
       .addCase(removeContext.fulfilled, (state, { payload: id }) => {
         state.list = state.list.filter((task) => task.id !== id);
-        state.currentContextId = null;
+        state.currentContext = null;
       })
       .addCase(changeCurrentProject, (state) => {
-        state.currentContextId = null;
+        state.currentContext = null;
       })
       .addMatcher(isError, (state, action: PayloadAction<string>) => {
         state.loading = false;

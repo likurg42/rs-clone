@@ -4,7 +4,6 @@ import { Project } from '../types/projectType';
 import { RootState, useAppDispatch, useAppSelector } from '../slice/store';
 import {
   changeCurrentProject,
-  ChangeCurrentProjectPayload,
   fetchProjects,
   FetchProjectsPayload,
   createProject,
@@ -16,7 +15,7 @@ import {
 } from '../slice/projectSlice';
 
 interface UseProjects {
-  changeCurrentProject: (payload: ChangeCurrentProjectPayload) => void;
+  changeCurrentProject: (payload: Project | null) => void;
   fetchProjects: (payload: FetchProjectsPayload) => void;
   createProject: (payload: CreateProjectPayload) => void;
   updateProject: (payload: UpdateProjectPayload) => void;
@@ -30,7 +29,14 @@ const useProjects = (): UseProjects => {
   const dispatch = useAppDispatch();
   const projects = useAppSelector((state: RootState) => state.projects.list);
 
-  const currentProjectId = useAppSelector((state: RootState) => state.projects.currentProjectId);
+  const currentProjectId = useAppSelector((state: RootState) => {
+    if (state.projects.currentProject) {
+      const { id } = state.projects.currentProject;
+      return id;
+    }
+
+    return null;
+  });
 
   const currentProject = useAppSelector((state: RootState) => state.projects.list.find(
     (project) => project.id === currentProjectId,
