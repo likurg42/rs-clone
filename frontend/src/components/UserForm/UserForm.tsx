@@ -23,7 +23,7 @@ const UserForm: React.FC<FormProps> = (
   };
 
   return (
-    <form className="form" onSubmit={form.handleSubmit}>
+    <form className="form" onSubmit={form.handleSubmit} autoComplete="off">
       <div className="form__input-container">
         <label className="form__label" htmlFor="email">
           Email
@@ -37,6 +37,7 @@ const UserForm: React.FC<FormProps> = (
           onChange={form.handleChange}
           onFocus={deleteError}
           onBlur={(e) => { form.handleBlur(e); }}
+          autoComplete="off"
         />
         {form.errors.email && form.touched.email && (
           <p className="form__error">{form.errors.email}</p>
