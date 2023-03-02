@@ -1,0 +1,24 @@
+{
+  "name": "rs-clone",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run start --prefix backend",
+    "build": "npm run build --prefix frontend",
+    "dev": "concurrently \"npm run --prefix backend start:dev\" \"npm run --prefix frontend dev\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/likurg42/rs-clone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/likurg42/rs-clone/issues"
+  },
+  "homepage": "https://github.com/likurg42/rs-clone#readme",
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}

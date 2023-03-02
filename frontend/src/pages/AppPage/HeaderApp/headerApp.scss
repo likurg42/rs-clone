@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin burger-menu {
+  width: 15px;
+  height: 1px;
+  position: relative;
+  border-top: 1px solid var(--header-icons-bg-clr);
+
+}
+
+.header-tasks {
+  background-color: var(--header-background);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__burger-tasks {
+  @include burger-menu;
+  cursor: pointer;
+
+  &::before {
+    content: '';
+    display: block;
+    @include burger-menu;
+    height: 12px;
+    position: absolute;
+    top: -6px;
+
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    @include burger-menu;
+    position: relative;
+    top: 4px;
+
+  }
+
+}
+
+.switch {
+  width: 30px;
+  height: 25px;
+  display: block;
+  position: relative;
+
+  &__input {
+    z-index: -1;
+    opacity: 0;
+  }
+
+  &__input+&__span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: url(./moon-icon.svg) no-repeat;
+    background-size: 24px 24px;
+    cursor: pointer;
+    transition: all 0.5s ease-out;
+  }
+
+  &__input:checked+&__span {
+    background-position: 0 -26px;
+    background: url(./sun-icon.svg) no-repeat;
+    background-size: 24px 24px;
+    transition: all 0.5s ease-out;
+  }
+}

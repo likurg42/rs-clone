@@ -1,0 +1,42 @@
+.login {
+  margin-top: 30px;
+
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacer)
+  }
+
+  &__content {
+    flex: 1 0 calc(50% - var(--spacer));
+
+    @media screen and (max-width: 40rem) {
+      flex: 1 0 100%;
+      order: 2;
+    }
+  }
+
+  &__img {
+    flex: 1 0 calc(50% - var(--spacer));
+
+    @media screen and (max-width: 40rem) {
+      flex: 1 0 100%;
+      order: 1;
+    }
+  }
+}
+
+.content {
+  &__title {
+    padding-bottom: 20px;
+    font-size: 32px;
+    font-weight: bold;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+}

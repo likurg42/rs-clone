@@ -1,0 +1,6 @@
+.main-page {
+    display: grid;
+    grid-template-columns: minmax(auto, 300px) 1fr;
+    font-family: sans-serif;
+    background: var(--main-page-background);
+}

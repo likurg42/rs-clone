@@ -1,0 +1,45 @@
+:root {
+  /* Colors */
+  --white: rgb(255,255,255);
+  --black: rgb(0, 0, 0);
+  --black-900: rgb(32,32,32);
+  --primary-400: rgb(219,76,63); ;
+  --gray-50:rgb(255,255,255, 0.87);
+  --gray-100: rgb(250,250,250);
+  --gray-200: rgb(238,238,238);
+  --gray-300: rgb(128,128,128);
+  --dark-gray-600: hsla(0,0%,100%,0.1);
+  --dark-gray-700:rgb(40,40,40);
+  --dark-gray-800:rgb(36,36,36);
+  --dark-gray-900:rgb(32,32,32);
+
+  --header-background: var(--primary-400);
+  --header-icons-bg-clr: var(--white);
+  --sidebar-background: var(--gray-100);
+  --main-page-background: var(--white);
+  --task-border-clr: var(--gray-200);
+  --checkbox-icon-bg-clr: var(--gray-300);
+  --trash-icon-bg-clr: var(--black-900);
+  --font-header-clr: var(--black-900);
+  --sidebar-elem-hover: var(--gray-200);
+  --task-divider: var(--gray-100);
+
+
+
+  /* Fonts */
+  --ff: "Hanken Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* Spacing */
+  --container-gap: clamp(1rem, 4vw, 3rem);
+  --spacer: clamp(1rem, 3vw, 2rem);
+
+  /* Meda Queries */
+  --width-xl: 75rem;
+  --width-lg: 62rem;
+  --width-md: 48rem;
+  --width-sm: 36rem;
+  @custom-media --media-xl (min-width: 75rem);
+  @custom-media --media-lg (min-width: 62rem);
+  @custom-media --media-md (min-width: 48rem);
+  @custom-media --media-sm (min-width: 36rem);
+}

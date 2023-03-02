@@ -1,0 +1,55 @@
+.signup {
+  margin-top: 30px;
+
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  &__content,
+  &__img {
+    flex: 1 0 50%;
+
+    @media screen and (max-width: 40rem) {
+      flex: 1 0 100%;
+      order: 2;
+    }
+  }
+
+  &__video {
+    flex: 1 1 50%;
+
+    @media screen and (max-width: 40rem) {
+      max-width: 200px;
+      flex: 1 1 100%;
+      order: 1;
+    }
+  }
+}
+
+.content {
+  &__title {
+    padding-bottom: 20px;
+    font-size: 32px;
+    font-weight: bold;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__account {
+    padding-top: 20px;
+    font-size: 15px;
+    font-weight: 300;
+    color: rgb(80, 80, 80);
+  }
+}
+
+.video {
+  width: 100%;
+  max-height: 500px;
+}

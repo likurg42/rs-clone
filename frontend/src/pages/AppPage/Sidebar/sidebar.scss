@@ -1,0 +1,30 @@
+.sidebar {
+    // width: 305px;
+    height: 100%;
+    background-color: var(--sidebar-background);
+    padding: 5px 18px;
+    box-sizing: border-box;
+    font-family: sans-serif;
+
+    &__filter {
+        margin: 20px 0 0 0;
+        display: flex;
+        align-items: center;
+    }
+
+    &__projects {
+        display: flex;
+        flex-direction: column;
+        margin: 20px 0 0 0;
+    }
+
+    &__header {
+        color: grey;
+        font-size: 14px;
+        padding: 0 0 10px 0;
+
+        &~& {
+            margin-top: 1rem;
+        }
+    }
+}

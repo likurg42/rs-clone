@@ -1,0 +1,22 @@
+.add-project-button-wrapper {
+  display: flex;
+  margin-left: 1rem;
+}
+.add-project-button {
+  all: unset;
+  display: flex;
+  flex-grow: 1;
+  height: 2rem;
+  cursor: pointer;
+  align-items: center;
+
+  img {
+      padding: 0 10px 0 0;
+  }
+
+  .add__text {
+    color: var(--font-header-clr);
+
+      font-size: 14px;
+  }
+}

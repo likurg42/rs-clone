@@ -1,0 +1,93 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+
+  &__input-container {
+    position: relative;
+    height: 62px;
+    padding: 8px;
+    border: 1px solid rgb(238, 238, 238);
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    border-radius: 8px;
+
+  }
+
+  &__label {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: inherit;
+
+  }
+
+  &__email,
+  &__password {
+    border: none;
+    font-size: 16px;
+    font-family: inherit;
+
+  }
+
+  &__button {
+    padding: 9px 14px;
+    background-color: rgb(219, 76, 63);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: inherit;
+
+  }
+
+  :active,
+  :hover,
+  :focus {
+    outline: 0;
+    outline-offset: 0;
+  }
+
+  &__password-control {
+    width: 24px;
+    height: 24px;
+    background-image: url("./eye-close.svg");
+    position: absolute;
+    right: 8px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+    cursor: pointer;
+  }
+
+  &__password-view {
+    background-image: url("./eye-open.svg");
+  }
+
+  &__error {
+    margin: 0;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    color: rgb(219, 76, 63);
+    font-weight: bold;
+  }
+
+  &__server-error {
+    color: rgb(219, 76, 63);
+    font-weight: bold;
+  }
+}
+
+.form__button:disabled {
+  background-color: gray;
+}
+
+// .form__button:hover{
+//   opacity: 0.7;
+// }
